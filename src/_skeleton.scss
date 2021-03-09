@@ -1,0 +1,92 @@
+// Layout widths translation to SASS variables
+$mw-text: rem(layout-width('text'));
+$mw-content: rem(layout-width('content'));
+$mw-inner: rem(layout-width('inner'));
+$mw-outer: rem(layout-width('outer'));
+
+// LAYOUT
+// ---
+%layout-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100vw;
+  height: auto;
+
+  overflow: hidden;
+}
+
+%layout-body {
+  display: grid;
+  /* autoprefixer: ignore next */
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+
+  width: 100%;
+  height: auto;
+
+  grid-template-columns:
+    0
+    gap(-1)
+    gap(-1)
+    minmax(min-content, $mw-content)
+    gap(-1)
+    gap(-1)
+    0;
+
+  @include screen(medium) {
+    $min-content: $mw-content - (gap(-1) * 4);
+    $inner-span: not-less-than(($mw-inner - $mw-content) / 2);
+    $outer-span: not-less-than(($mw-outer - $mw-inner) / 2, gap(-1));
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(gap(-1), $outer-span)
+      minmax(gap(-1), $inner-span)
+      minmax($min-content, $mw-content)
+      minmax(gap(-1), $inner-span)
+      minmax(gap(-1), $outer-span)
+      minmax(0, 1fr);
+  }
+
+  @include screen(large) {
+    $min-content: $mw-content - (gap(0) * 4);
+    $inner-span: not-less-than(($mw-inner - $mw-content) / 2);
+    $outer-span: not-less-than(($mw-outer - $mw-inner) / 2, gap(0));
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(gap(0), $outer-span)
+      minmax(gap(0), $inner-span)
+      minmax($min-content, $mw-content)
+      minmax(gap(0), $inner-span)
+      minmax(gap(0), $outer-span)
+      minmax(0, 1fr);
+  }
+
+  @include screen(xlarge) {
+    $min-content: $mw-content - (gap(1) * 4);
+    $inner-span: not-less-than(($mw-inner - $mw-content) / 2);
+    $outer-span: not-less-than(($mw-outer - $mw-inner) / 2, gap(1));
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(gap(1), $outer-span)
+      minmax(gap(1), $inner-span)
+      minmax($min-content, $mw-content)
+      minmax(gap(1), $inner-span)
+      minmax(gap(1), $outer-span)
+      minmax(0, 1fr);
+  }
+
+  @include ie {
+    @for $i from 1 to 100 {
+      *:nth-child(#{$i}) {
+        grid-row: $i;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,38 @@
+%grid {
+  --grid-free-space: minmax(calc((100vw - var(--layout-outer-width)) / 2), 1fr);
+
+  display: grid;
+  grid-template-columns: 
+    var(--grid-free-space)
+    repeat(var(--grid-columns), 1fr)
+    var(--grid-free-space);
+  grid-gap: var(--grid-gap);
+
+  width: 100vw;
+  height: auto;
+}
+
+.grid {
+  @extend %grid;
+
+}
+
+.item {
+  height: 100px;
+
+  background-color: navy;
+
+  opacity: .5;
+}
+
+.outer {
+  grid-column: 2 / calc(var(--grid-columns) + 2);
+}
+
+.inner {
+  grid-column: 3 / calc(var(--grid-columns) + 1);
+}
+
+.content {
+  grid-column: 4 / calc(var(--grid-columns));
+}

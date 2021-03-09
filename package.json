@@ -1,0 +1,17 @@
+{
+  "name": "monolith",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "# echo 'Postinstall success' > done.txt && cp done.txt $INIT_CWD"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9",
+    "parcel": "^2.0.0-beta.1",
+    "postcss": "^8",
+    "postcss-modules": "^3",
+    "sass": "^1.32.8"
+  },
+  "dependencies": {}
+}
