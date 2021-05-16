@@ -5,13 +5,46 @@
     <meta name="viewport" content="width=device-width">
     <title>Monilith</title>
     <link rel="stylesheet" href="src/main.scss" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script src="src/js/main.js"></script> 
   </head>
   <body>
-    <main id="app">
+    <main id="app" data-controller="app">
+      <h1>Test header</h1>
+      <input type="number" data-app-target="input" data-css-var="--grid-columns">
+      <input type="number" data-app-target="input" data-css-var="--grid-gap"
+      data-unit="rem">
+      <input type="number" data-app-target="input"
+      data-css-var="--grid-outer-width" data-unit="vw">
+
       <div class="grid">
         <div class="item outer">item</div>
         <div class="item inner">item</div>
         <div class="item content">item</div>
+      </div>
+
+        <input type="range" data-app-target="input"
+        data-css-var="--typo-h1-font-size" data-unit="px">
+        <input type="color" data-app-target="input"
+        data-css-var="--typo-h1-color">
+
+      <div class="generic-content">
+        <h1>Header</h1>
+        <h2>Header</h2>
+        <h3>Header</h3>
+        <h4>Header</h4>
+        <h5>Header</h5>
+        <h6>Header</h6>
+        <p class="intro">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+        <p>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+        <p class="p-small">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+
+
       </div>
     </main>
   </body>

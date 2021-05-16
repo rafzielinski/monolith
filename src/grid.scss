@@ -1,5 +1,5 @@
 %grid {
-  --grid-free-space: minmax(calc((100vw - var(--layout-outer-width)) / 2), 1fr);
+  --grid-free-space: minmax(calc((100vw - var(--grid-outer-width)) / 2), 1fr);
 
   display: grid;
   grid-template-columns: 
@@ -15,12 +15,13 @@
 .grid {
   @extend %grid;
 
+  padding: 5rem 0;
 }
 
 .item {
   height: 100px;
 
-  background-color: navy;
+  background-color: yellow;
 
   opacity: .5;
 }

@@ -1,0 +1,73 @@
+// ***
+// TYPOGRAPHY
+// ***
+$typographyTags: (
+  'h1': 'h1',
+  'h2': 'h2',
+  'h3': 'h2',
+  'h4': 'h4',
+  'h5': 'h5',
+  'h6': 'h6',
+  '.intro': 'intro',
+  'p': 'paragraph',
+  'p.small': 'paragraph-small',
+  'p > a': 'inline-link',
+  'ul': 'unordered-list',
+  'ul li': 'ul-item',
+  'ol': 'ordered-list',
+  'ol li': 'ol-item',
+  'blockquote': 'blockquote',
+  'blockquote cite': 'blockquote-cite'
+);
+
+@each $tag, $name in $typographyTags {
+  // @debug $tag, $name '/';
+  %#{$name} {
+    font-family: var(--typo-#{$name}-font-family);
+    font-size: var(--typo-#{$name}-font-size);
+    color: var(--typo-#{$name}-color);
+
+    @extend %#{$name}-custom-css !optional;
+  }
+
+  #{$tag} { @extend %#{$name}; }
+}
+
+// h1 { @extend %h1; }
+
+// $default-typography-breakpoint: $mw-content;
+
+// $default-font-sizes: (
+//   header6: ms(0),
+//   header5: ms(1),
+//   header4: ms(2),
+//   header3: ms(3),
+//   header2: ms(4),
+//   header1: ms(5),
+// );
+
+// %h1 { @include generateTypography('header1'); }
+// %h2 { @include generateTypography('header2'); }
+// %h3 { @include generateTypography('header3'); }
+// %h4 { @include generateTypography('header4'); }
+// %h5 { @include generateTypography('header5'); }
+// %h6 { @include generateTypography('header6'); }
+//
+// %intro { @include generateTypography('intro'); }
+// %p { @include generateTypography('paragraph'); }
+// %p-small { @include generateTypography('paragraph-small'); }
+// %link { @include generateTypography('link'); }
+// %link-inline {
+//   font-size: inherit;
+//   line-height: inherit;
+//   font-weight: inherit;
+//   color: inherit; 
+//   text-decoration: none; 
+// }
+// %ul { @include generateTypography('unordered-list'); }
+// %ul-li { @include generateTypography('ul-item'); }
+// %ol { @include generateTypography('ordered-list'); }
+// %ol-li { @include generateTypography('ol-item'); }
+// %quote { @include generateTypography('quote'); }
+// %quote-cite { @include generateTypography('quote-cite'); }
+

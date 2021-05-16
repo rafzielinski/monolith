@@ -1,0 +1,30 @@
+:root {
+  // Font
+  --font-family-primary: 'sans-serif';
+  --font-family-secondary: 'serif';
+  --font-base-size: 16px;
+  --font-base-line-height: 1.45;
+  --font-base-color: var(--color-dark);
+
+  // Typography
+  --typo-h1-font-family: var(--font-family-primary);
+  --typo-h1-font-size: 4rem;
+  --typo-h1-font-weight: 600;
+  --typo-h1-line-height: 1.5;
+  --typo-h1-text-transform: uppercase;
+  --typo-h1-text-decoration: none;
+  --typo-h1-color: var(--color-primary);
+}
+
+%h1-custom-css {
+  &::before {
+    display: inline-block;
+
+    width: var(--typo-h1-line-height);
+    height: var(--typo-h1-line-height);
+    
+    background-color: var(--typo-h1-color);
+
+    content: '';
+  }
+}
