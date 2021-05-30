@@ -1,6 +1,6 @@
 import { Application } from "stimulus"
 
-import AppController from "./controllers/app_controller"
+import InputController from "./controllers/input_controller"
 
 const application = Application.start()
-application.register("app", AppController)
+application.register("input", InputController)
