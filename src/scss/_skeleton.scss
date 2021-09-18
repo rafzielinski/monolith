@@ -18,7 +18,7 @@ $mw-outer: rem(layout-width('outer'));
   overflow: hidden;
 }
 
-%layout-body {
+%layout-grid {
   display: grid;
   /* autoprefixer: ignore next */
   grid-auto-rows: auto;

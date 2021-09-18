@@ -4,26 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Monilith</title>
-    <link rel="stylesheet" href="src/main.scss" type="text/css" media="screen" title="no title" charset="utf-8">
-    <script src="src/js/main.js"></script> 
+    <link rel="stylesheet" href="./scss/main.scss">
   </head>
   <body>
     <main id="app">
       <h1>Test header</h1>
-      <div class="input"
-             data-controller="input" 
-             data-css-var="--grid-columns">
-        <input type="range"
-               data-target="input.input"
-               min="5"
-               max="25">
+      <div class="input" data-controller="input" data-css-var="--grid-columns">
+        <input type="range" data-target="input.input" min="5" max="25">
       </div>
-      <div class="input"
-             data-controller="input" 
-             data-css-var="--grid-gap"
-             data-unit="rem">
-        <input type="number"
-               data-target="input.input">
+      <div class="input" data-controller="input" data-css-var="--grid-gap" data-unit="rem">
+        <input type="number" data-target="input.input">
         <select data-target="input.unit">
           <option value="px">px</option>
           <option value="rem">rem</option>
@@ -32,12 +22,8 @@
           <option value="vh">vh</option>
         </select>
       </div>
-      <div class="input"
-             data-controller="input"
-             data-css-var="--grid-outer-width" 
-             data-unit="vw">
-        <input type="number"
-               data-target="input.input">
+      <div class="input" data-controller="input" data-css-var="--grid-outer-width" data-unit="vw">
+        <input type="number" data-target="input.input">
         <select data-target="input.unit">
           <option value="px">px</option>
           <option value="rem">rem</option>
@@ -46,7 +32,7 @@
           <option value="vh">vh</option>
         </select>
       </div>
-      </div>
+      
 
 
       <div class="grid">
@@ -55,12 +41,8 @@
         <div class="item content">item</div>
       </div>
 
-      <div class="input" 
-           data-controller="input"
-           data-css-var="--typo-h1-font-size" 
-           data-unit="px">
-        <input type="range" 
-               data-target="input.input">
+      <div class="input" data-controller="input" data-css-var="--typo-h1-font-size" data-unit="px">
+        <input type="range" data-target="input.input">
         <select data-target="input.unit">
           <option value="px">px</option>
           <option value="rem">rem</option>
@@ -70,11 +52,24 @@
         </select>
       </div>
 
-      <div class="input"
-           data-controller="input"
-           data-css-var="--typo-h1-color">
-        <input type="color" 
-               data-target="input.input">
+      <div class="input" data-controller="input" data-css-var="--typo-h1-color">
+        <input type="color" data-target="input.input">
+      </div>
+
+      <div class="monolith__colors">
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
+        <div class="monolith__colors-item"></div>
       </div>
 
       <div class="generic-content">

@@ -18,14 +18,6 @@
   padding: 5rem 0;
 }
 
-.item {
-  height: 100px;
-
-  background-color: yellow;
-
-  opacity: .5;
-}
-
 .outer {
   grid-column: 2 / calc(var(--grid-columns) + 2);
 }

@@ -1,0 +1,19 @@
+$config-colors: (
+  'gold': hsla(42,100%,46%,1),
+  'indigo': rgb(0, 73, 102),
+  'ink-black': #0b131e,
+  'white': #fff,
+  'black': hsl(0,0%,0%,1)
+);
+
+@each $name, $value in $config-colors {
+  $h: hue($value);
+  $s: saturation($value);
+  $l: lightness($value);
+  $a: alpha($value);
+
+  :root {
+    --config-color-#{$name}: hsla(#{$h, $s, $l, $a});
+  }
+}
+

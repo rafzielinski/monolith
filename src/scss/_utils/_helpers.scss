@@ -53,25 +53,11 @@
   @return if(strip-unit($value) < strip-unit($min), $min, $value);
 }
 
-%clearfix {
-  &::after {
-    display: table;
-
-    content: '';
-    clear: both;
+@function v($var, $fallback: null) {
+  @if($fallback) {
+    @return var(--#{$var}, #{$fallback});
+  } @else {
+    @return var(--#{$var});
   }
 }
 
-%visually-hidden {
-  position: absolute;
-
-  padding: 0;
-  margin: -1px;
-
-  width: 1px;
-  height: 1px;
-
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}

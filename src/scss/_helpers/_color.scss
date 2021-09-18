@@ -4,8 +4,14 @@
 //
 // Usage: color('name')
 //
-@function color($key) {
-  @return map-get($settings-colors, $key);
+@function color($key, $fade-in: null, $fade-out: null) {
+  @if $fade-in {
+    @return fade-in(map-get($config-colors, $key), $fade-in);
+  } @else if $fade-out {
+    @return fade-out(map-get($config-colors, $key), $fade-out);
+  } @else {
+    @return map-get($config-colors, $key);
+  }
 }
 
 // GREY - helper function
