@@ -7,11 +7,12 @@
   --color-light: var(--config-color-white);
   --color-dark: var(--config-color-black);
 
+  --color-shadow-1: #{color(ink-black, $fade-out: .25)};
+
   // --grey-1: var(--config-color-grey);
 
   // Shadow
-  // --shadow-1-color: 
-  // --shadow-1: 
+  --shadow-1: 0 .05rem .5rem 0 var(--color-shadow-1);
 
   // Spacings
   --space: 1rem;

@@ -21,7 +21,8 @@
       min-width: 8rem;
       height: auto;
 
-      box-shadow: 0 0 0 1px var(--color-dark);
+      border-radius: 50%;
+      box-shadow: var(--shadow-1);
       
       &::before {
         display: block;
@@ -34,14 +35,16 @@
         bottom: 0;
         left: 50%;
         
-        transform: translate(-50%, 50%);
+        transform: translate(-50%, 150%);
         
         padding: .25rem .5rem;
         
         min-width: 80%;
         max-width: calc(100% + var(--space));
         
-        // background: var(--color-dark);
+        background: var(--color-light);
+        border-radius: .25rem;
+        box-shadow: var(--shadow-1);
         
         font-size: .75rem;
         font-weight: bold;
