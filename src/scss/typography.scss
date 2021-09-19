@@ -4,7 +4,7 @@
 $typographyTags: (
   'h1': 'h1',
   'h2': 'h2',
-  'h3': 'h2',
+  'h3': 'h3',
   'h4': 'h4',
   'h5': 'h5',
   'h6': 'h6',
@@ -20,18 +20,77 @@ $typographyTags: (
   'blockquote cite': 'blockquote-cite'
 );
 
-@each $tag, $name in $typographyTags {
-  // @debug $tag, $name '/';
+// @each $tag, $name in $typographyTags {
+//   // @debug $tag, $name '/';
+//   %#{$name} {
+//     // --typo-#{$name}-font-variable-vw: calc(
+//     //   (1600 * (var(--typo-#{$name}-font-max) - var(--typo-#{$name}-font-min)))
+//     //   / (var(--typo-#{$name}-font-max-screen, --font-max-screen) - var(--typo-#{$name}-font-min-screen, --font-min-screen))
+//     // )
+//     // --typo-#{$name}-font-variable-rem: calc()
+//     //
+//     // --typo-#{$name}-font-variable: calc(var(--typo-#{$name}))
+//
+// // const factor = (1 / (maxVw - minVw)) * (maxFs - minFs);
+// // const calcRem = minFs - minVw * factor;
+// // const calcVw = 100 * factor;
+//
+//     font-family: var(--typo-#{$name}-font-family);
+//     font-size: var(--typo-#{$name}-font-max-size);
+//     font-size: clamp(
+//       var(--typo-#{$name}-font-min-size), 
+//       var(--typo-#{$name}-font-variable), 
+//       var(--typo-#{$name}-font-max-size)
+//     );
+//     color: var(--typo-#{$name}-color);
+//
+//     @extend %#{$name}-custom-css !optional;
+//   }
+// }
+
+// calculations stonem from here: https://github.com/jakobsen/fluid-typography/blob/main/src/components/result.js
+// numbers generated are ugly, should be rounded to float 2
+@each $name, $config in $config-typography {
+  $maxScreen: rem(map-get(map-get(map-get($config, 'fluid'), 'max'), 'screen'));
+  $minScreen: rem(map-get(map-get(map-get($config, 'fluid'), 'min'), 'screen'));
+  $maxFont: map-get(map-get(map-get($config, 'fluid'), 'max'), 'size');
+  $minFont: map-get(map-get(map-get($config, 'fluid'), 'min'), 'size');
+
+  $factor: (1 / ($maxScreen - $minScreen) * ($maxFont - $minFont));
+  $rem: $minFont - $minScreen * $factor;
+  $vw: (100 * $factor) * 1vw;
+
   %#{$name} {
-    font-family: var(--typo-#{$name}-font-family);
-    font-size: var(--typo-#{$name}-font-size);
-    color: var(--typo-#{$name}-color);
-
-    @extend %#{$name}-custom-css !optional;
+    font-family: map-get($config, 'family');
+    font-size: clamp($minFont, calc($vw + $rem), $maxFont);
   }
-
-  #{$tag} { @extend %#{$name}; }
 }
+
+.generic-content {
+  @each $tag, $name in $typographyTags {
+    #{$tag} { @extend %#{$name} !optional; }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // h1 { @extend %h1; }
 

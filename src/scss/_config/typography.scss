@@ -1,29 +1,79 @@
+$settings-font-base-size: 16px;
+
 :root {
   // Font
-  --font-family-primary: 'sans-serif';
-  --font-family-secondary: 'serif';
+  --font-family-primary: 'mono';
+  --font-family-secondary: 'sans-serif';
   --font-base-size: 16px;
   --font-base-line-height: 1.45;
   --font-base-color: var(--color-dark);
 
+  --font-max-screen: 1440px;
+  --font-min-screen: 600px;
+}
+
+$config-typography: (
+  'h1': (
+    'tag': 'h1',
+    'family': 'secondary',
+    'size': 7rem,
+    'fluid': (
+      'min': (
+        'size': 4.5rem,
+        'screen': 600px,
+      ),
+      'max': (
+        'size': 7rem,
+        'screen': 1440px,
+      ),
+    ),
+    'weight': 600,
+    'line-height': 1.5,
+    'transform': 'none',
+    'decoration': 'none',
+    'color': 'gold'
+  )
+);
+
+:root {
   // Typography
   --typo-h1-font-family: var(--font-family-primary);
-  --typo-h1-font-size: 4rem;
+  --typo-h1-font-min: 4.5rem;
+  --typo-h1-font-max: 7rem;
   --typo-h1-font-weight: 600;
   --typo-h1-line-height: 1.5;
   --typo-h1-text-transform: uppercase;
   --typo-h1-text-decoration: none;
-  --typo-h1-color: var(--color-primary);
+  --typo-h1-color: var(--color-accent);
+
+  --typo-h2-font-family: var(--font-family-primary);
+  --typo-h2-font-max-size: 5rem;
+  --typo-h2-font-min-size: 3.5rem;
+  --typo-h2-font-variable: 4vw;
+  --typo-h2-font-weight: 500;
+  --typo-h2-line-height: 1.4;
+  --typo-h2-color: var(--color-accent);
+
+  --typo-h3-font-family: var(--font-family-secondary);
+  --typo-h3-font-max-size: 4rem;
+  --typo-h3-font-min-size: 3rem;
+  --typo-h3-font-variable: 3vw;
+  --typo-h3-font-weight: 500;
+  --typo-h3-line-height: 1.4;
 }
 
 %h1-custom-css {
   &::before {
     display: inline-block;
 
-    width: var(--typo-h1-line-height);
-    height: var(--typo-h1-line-height);
+    width: .25em;
+    height: 1.25em;
+
+    margin-right: .25em;
     
     background-color: var(--typo-h1-color);
+
+    vertical-align: bottom;
 
     content: '';
   }

@@ -1,4 +1,4 @@
-%grid {
+%layout-grid {
   --grid-free-space: minmax(calc((100vw - var(--grid-outer-width)) / 2), 1fr);
 
   display: grid;
@@ -12,20 +12,20 @@
   height: auto;
 }
 
-.grid {
-  @extend %grid;
+.layout__grid {
+  @extend %layout-grid;
 
   padding: 5rem 0;
 }
 
-.outer {
+.layout__item-outer {
   grid-column: 2 / calc(var(--grid-columns) + 2);
 }
 
-.inner {
+.layout__item-inner {
   grid-column: 3 / calc(var(--grid-columns) + 1);
 }
 
-.content {
+.layout__item-content {
   grid-column: 4 / calc(var(--grid-columns));
 }
