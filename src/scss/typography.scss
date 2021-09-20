@@ -48,7 +48,7 @@ $typographyTags: (
 //   }
 // }
 
-// calculations stonem from here: https://github.com/jakobsen/fluid-typography/blob/main/src/components/result.js
+// calculations stonen from here: https://github.com/royalfig/fluid-typography-calculator/blob/master/index.js
 // numbers generated are ugly, should be rounded to float 2
 @each $name, $config in $config-typography {
   $maxScreen: rem(map-get(map-get(map-get($config, 'fluid'), 'max'), 'screen'));
