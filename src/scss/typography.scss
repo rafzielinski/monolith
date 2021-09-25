@@ -1,132 +1,55 @@
-// ***
-// TYPOGRAPHY
-// ***
-$typographyTags: (
-  'h1': 'h1',
-  'h2': 'h2',
-  'h3': 'h3',
-  'h4': 'h4',
-  'h5': 'h5',
-  'h6': 'h6',
-  '.intro': 'intro',
-  'p': 'paragraph',
-  'p.small': 'paragraph-small',
-  'p > a': 'inline-link',
-  'ul': 'unordered-list',
-  'ul li': 'ul-item',
-  'ol': 'ordered-list',
-  'ol li': 'ol-item',
-  'blockquote': 'blockquote',
-  'blockquote cite': 'blockquote-cite'
-);
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:string';
 
-// @each $tag, $name in $typographyTags {
-//   // @debug $tag, $name '/';
-//   %#{$name} {
-//     // --typo-#{$name}-font-variable-vw: calc(
-//     //   (1600 * (var(--typo-#{$name}-font-max) - var(--typo-#{$name}-font-min)))
-//     //   / (var(--typo-#{$name}-font-max-screen, --font-max-screen) - var(--typo-#{$name}-font-min-screen, --font-min-screen))
-//     // )
-//     // --typo-#{$name}-font-variable-rem: calc()
-//     //
-//     // --typo-#{$name}-font-variable: calc(var(--typo-#{$name}))
-//
-// // const factor = (1 / (maxVw - minVw)) * (maxFs - minFs);
-// // const calcRem = minFs - minVw * factor;
-// // const calcVw = 100 * factor;
-//
-//     font-family: var(--typo-#{$name}-font-family);
-//     font-size: var(--typo-#{$name}-font-max-size);
-//     font-size: clamp(
-//       var(--typo-#{$name}-font-min-size), 
-//       var(--typo-#{$name}-font-variable), 
-//       var(--typo-#{$name}-font-max-size)
-//     );
-//     color: var(--typo-#{$name}-color);
-//
-//     @extend %#{$name}-custom-css !optional;
-//   }
-// }
+@function safe-unquote($value) {
+  @if (type-of($value) == string) {
+    @return string.unquote($value);
+  } @else {
+    @return $value;
+  }
+}
+
+@function map-get-plain($map, $keys...) {
+  $value: map.get($map, $keys...);
+
+  @return safe-unquote($value);
+}
 
 // calculations stonen from here: https://github.com/royalfig/fluid-typography-calculator/blob/master/index.js
 // numbers generated are ugly, should be rounded to float 2
 @each $name, $config in $config-typography {
-  $maxScreen: rem(map-get(map-get(map-get($config, 'fluid'), 'max'), 'screen'));
-  $minScreen: rem(map-get(map-get(map-get($config, 'fluid'), 'min'), 'screen'));
-  $maxFont: map-get(map-get(map-get($config, 'fluid'), 'max'), 'size');
-  $minFont: map-get(map-get(map-get($config, 'fluid'), 'min'), 'size');
+  $baseFontSize: map-get-plain($config, 'font-size');
+  $maxScreen: rem(map-get-plain($config, "font-size-fluid", "max", "screen") or $config-font-max-screen);
+  $minScreen: rem(map-get-plain($config, "font-size-fluid", "min", "screen") or $config-font-min-screen);
+  $maxFont: map-get-plain($config, "font-size-fluid", "max", "size") or map-get-plain($config, "font-size-fluid", "max");
+  $minFont: map-get-plain($config, "font-size-fluid", "min", "size") or map-get-plain($config, "font-size-fluid", "min");
 
-  $factor: (1 / ($maxScreen - $minScreen) * ($maxFont - $minFont));
+  $factor: (math.div(1, ($maxScreen - $minScreen)) * ($maxFont - $minFont));
+
   $rem: $minFont - $minScreen * $factor;
   $vw: (100 * $factor) * 1vw;
 
-  %#{$name} {
-    font-family: map-get($config, 'family');
+@debug map-get-plain($config, 'selector');
+
+  %#{$name},
+  #{map-get($config, 'selector')} {
+    font-family: map-get-plain($config, 'font-family');
+
+    @if ($baseFontSize) {
+      font-size: rem($baseFontSize);
+    } @else {
+      font-size: $minFont;
+    }
+
     font-size: clamp($minFont, calc($vw + $rem), $maxFont);
+    line-height: map-get-plain($config, "line-height");
+    font-weight: map-get-plain($config, "font-weight");
+    color: map-get-plain($config, "color");
+    text-transform: map-get-plain($config, "text-transform");
+    text-decoration: map-get-plain($config, "text-decoration");
+
+    @extend %#{$name}-custom-css !optional
   }
 }
-
-.generic-content {
-  @each $tag, $name in $typographyTags {
-    #{$tag} { @extend %#{$name} !optional; }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// h1 { @extend %h1; }
-
-// $default-typography-breakpoint: $mw-content;
-
-// $default-font-sizes: (
-//   header6: ms(0),
-//   header5: ms(1),
-//   header4: ms(2),
-//   header3: ms(3),
-//   header2: ms(4),
-//   header1: ms(5),
-// );
-
-// %h1 { @include generateTypography('header1'); }
-// %h2 { @include generateTypography('header2'); }
-// %h3 { @include generateTypography('header3'); }
-// %h4 { @include generateTypography('header4'); }
-// %h5 { @include generateTypography('header5'); }
-// %h6 { @include generateTypography('header6'); }
-//
-// %intro { @include generateTypography('intro'); }
-// %p { @include generateTypography('paragraph'); }
-// %p-small { @include generateTypography('paragraph-small'); }
-// %link { @include generateTypography('link'); }
-// %link-inline {
-//   font-size: inherit;
-//   line-height: inherit;
-//   font-weight: inherit;
-//   color: inherit; 
-//   text-decoration: none; 
-// }
-// %ul { @include generateTypography('unordered-list'); }
-// %ul-li { @include generateTypography('ul-item'); }
-// %ol { @include generateTypography('ordered-list'); }
-// %ol-li { @include generateTypography('ol-item'); }
-// %quote { @include generateTypography('quote'); }
-// %quote-cite { @include generateTypography('quote-cite'); }
 

@@ -1,10 +1,11 @@
 $settings-font-base-size: 16px;
+$config-font-max-screen: 1280px;
+$config-font-min-screen: 800px;
 
 :root {
   // Font
   --font-family-primary: 'mono';
   --font-family-secondary: 'sans-serif';
-  --font-base-size: 16px;
   --font-base-line-height: 1.45;
   --font-base-color: var(--color-dark);
 
@@ -14,67 +15,78 @@ $settings-font-base-size: 16px;
 
 $config-typography: (
   'h1': (
-    'tag': 'h1',
-    'family': 'secondary',
-    'size': 7rem,
-    'fluid': (
-      'min': (
-        'size': 4.5rem,
-        'screen': 600px,
-      ),
-      'max': (
-        'size': 7rem,
-        'screen': 1440px,
-      ),
+    'selector': h1,
+    'font-family': 'var(--font-family-secondary)',
+    'font-size': 7rem,
+    'font-size-fluid': (
+      'min': 4.5rem,
+      'max': 7rem,
     ),
     'weight': 600,
+    'line-height': 2,
+    'text-transform': none,
+    'text-decoration': none,
+    'color': 'var(--color-accent)'
+  ),
+
+  'h2': (
+    'selector': h2,
+    'font-family': 'var(--font-family-secondary)',
+    'font-size-fluid': (
+      'min': 3.5rem,
+      'max': 5rem,
+    ),
+    'font-weight': 500,
     'line-height': 1.5,
-    'transform': 'none',
-    'decoration': 'none',
-    'color': 'gold'
+    'text-transform': none,
+    'text-decoration': none,
+    'color': 'var(--color-secondary)'
+  ),
+
+  'h3': (
+    'selector': h3,
+    'font-family': 'var(--font-family-primary)',
+    'font-size-fluid': (
+      'min': 3rem,
+      'max': (
+        'size': 4rem,
+      ),
+    ),
+    'weight': 500,
+    'line-height': 1.5,
+    'text-transform': uppercase,
+    'text-decoration': none,
+    'color': 'var(--color-accent)',
+  ),
+
+  'intro': (
+    'selector': '.intro',
+    'font-family': 'var(--font-family-secondary)',
+    'font-size-fluid': (
+      'min': 1.5rem,
+      'max': 2rem,
+    ),
+    'weight': 500,
+    'line-height': 1.5,
+    'text-transform': none,
+    'text-decoration': none,
+    'color': 'var(--color-accent)',
+  ),
+
+  'paragraph': (
+    'selector': 'p',
+    'font-family': 'var(--font-family-primary)',
+    'font-size-fluid': (
+      'min': 1rem,
+      'max': 1.25rem,
+    ),
+    'weight': 300,
+    'line-height': 1.25,
+    'text-transform': none,
+    'text-decoration': none,
+    'color': 'var(--color-secondary)',
   )
 );
 
-:root {
-  // Typography
-  --typo-h1-font-family: var(--font-family-primary);
-  --typo-h1-font-min: 4.5rem;
-  --typo-h1-font-max: 7rem;
-  --typo-h1-font-weight: 600;
-  --typo-h1-line-height: 1.5;
-  --typo-h1-text-transform: uppercase;
-  --typo-h1-text-decoration: none;
-  --typo-h1-color: var(--color-accent);
+// %h1-custom-css { color: red; }
 
-  --typo-h2-font-family: var(--font-family-primary);
-  --typo-h2-font-max-size: 5rem;
-  --typo-h2-font-min-size: 3.5rem;
-  --typo-h2-font-variable: 4vw;
-  --typo-h2-font-weight: 500;
-  --typo-h2-line-height: 1.4;
-  --typo-h2-color: var(--color-accent);
-
-  --typo-h3-font-family: var(--font-family-secondary);
-  --typo-h3-font-max-size: 4rem;
-  --typo-h3-font-min-size: 3rem;
-  --typo-h3-font-variable: 3vw;
-  --typo-h3-font-weight: 500;
-  --typo-h3-line-height: 1.4;
-}
-
-%h1-custom-css {
-  &::before {
-    display: inline-block;
-
-    width: .25em;
-    height: 1.25em;
-
-    margin-right: .25em;
-    
-    background-color: var(--typo-h1-color);
-
-    vertical-align: bottom;
-
-    content: '';
-  }
-}

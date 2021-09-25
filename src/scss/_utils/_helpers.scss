@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 // // Colour helper function
 // // Usage: color('name')
 // @function color($key) {
@@ -21,7 +23,7 @@
 // @return {Number} - Unitless number
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number * 0 + 1);
+    @return math.div($number, $number * 0 + 1);
   }
 
   @return $number;
@@ -31,16 +33,23 @@
 @function em($value) {
   $base_font: strip-unit($settings-font-base-size);
   $pixels: strip-unit($value);
-  $output: $pixels / $base_font;
+  $output: math.div($pixels, $base_font);
   @return $output * 1em;
 }
 
 // Change px to rem
 @function rem($value) {
-  $base_font: strip-unit($settings-font-base-size);
-  $pixels: strip-unit($value);
-  $output: $pixels / $base_font;
-  @return $output * 1rem;
+  $unit: unit($value);
+  @if ($unit == 'rem') {
+    @return $value;
+  } @else if ($unit == 'px') {
+    $base_font: strip-unit($settings-font-base-size);
+    $pixels: strip-unit($value);
+    $output: math.div($pixels, $base_font);
+    @return $output * 1rem;
+  } @else {
+    @return false;
+  }
 }
 
 // Returns 0 if $value is negative
@@ -55,9 +64,26 @@
 
 @function v($var, $fallback: null) {
   @if($fallback) {
-    @return var(--#{$var}, #{$fallback});
+    @return var(--#{safe-unquote($var)}, #{$fallback});
   } @else {
-    @return var(--#{$var});
+    @return var(--#{safe-unvuote($var)});
   }
 }
 
+/// toFixed() function in Sass
+/// @author Kitty Giraudel
+/// @param {Number} $float - Number to format
+/// @param {Number} $digits [2] - Number of digits to leave
+/// @return {Number}
+@function to-fixed($float, $digits: 2) {
+  $sass-precision: 5;
+  
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+    + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+    + "See https://github.com/sass/sass/issues/1122 for further informations.";
+  }
+  
+  $pow: math.pow(10, $digits);
+  @return math.div(math.round($float * $pow), $pow);
+}
