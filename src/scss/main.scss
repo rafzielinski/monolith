@@ -1,13 +1,13 @@
-@import 'reset';
+@import './reset';
 
-@import '_utils';
-@import '_helpers';
+@import './_utils';
+@import './_helpers';
 
-@import '_config';
+@import './_config';
 
-@import 'variables';
-@import 'grid';
-@import 'typography';
+@import './variables';
+@import './grid';
+@import './typography';
 
-@import '_monolith';
+@import './_monolith';
 
