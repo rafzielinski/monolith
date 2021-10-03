@@ -1,11 +1,19 @@
 %layout-grid {
-  --grid-free-space: minmax(0, calc((var(--grid-width) - var(--grid-outer-width) - var(--grid-gap) * 2 ) / 2)); 
+  // --grid-free-space: minmax(0, calc((var(--grid-width) - var(--grid-outer-width) - var(--grid-gap) * 2 ) / 2)); 
+  --grid-item-text-columns: calc(var(--grid-columns) - 6);
+  --grid-item-text-chunk: calc((var(--grid-item-text-width) - (var(--grid-gap) * (var(--grid-item-text-columns) - 1))) / var(--grid-item-text-columns));
+  --grid-item-medium-chunk: calc((var(--grid-item-medium-width) - var(--grid-item-text-width) - var(--grid-gap) * 2) / 2);
+  --grid-item-large-chunk: calc((var(--grid-item-large-width) - var(--grid-item-medium-width) - var(--grid-gap) * 2) / 2);
 
   display: grid;
   grid-template-columns: 
-    var(--grid-free-space)
-    repeat(var(--grid-columns), 1fr)
-    var(--grid-free-space);
+    1fr
+    minmax(0, var(--grid-item-large-chunk))
+    minmax(0, var(--grid-item-medium-chunk))
+    repeat(6, minmax(0,var(--grid-item-text-chunk)))
+    minmax(0, var(--grid-item-medium-chunk))
+    minmax(0, var(--grid-item-large-chunk))
+    1fr;
   grid-gap: var(--grid-gap);
 
   margin: 0 auto;
@@ -21,13 +29,13 @@
 }
 
 .layout__item-outer {
-  grid-column: 2 / calc(var(--grid-columns) + 2);
+  grid-column: 2 / calc(var(--grid-columns));
 }
 
 .layout__item-inner {
-  grid-column: 3 / calc(var(--grid-columns) + 1);
+  grid-column: 3 / calc(var(--grid-columns) - 1);
 }
 
 .layout__item-content {
-  grid-column: 4 / calc(var(--grid-columns));
+  grid-column: 4 / calc(var(--grid-columns) - 2);
 }

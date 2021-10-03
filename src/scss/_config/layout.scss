@@ -1,9 +1,11 @@
 :root {
   // Grid
   --grid-width: 100vw;
-  --grid-columns: 9;
+  --grid-columns: 12;
   --grid-gap: 1rem;
-  --grid-outer-width: 1000px;
+  --grid-item-large-width: 1000px;
+  --grid-item-medium-width: 700px;
+  --grid-item-text-width: 500px;
 
   --gap: 1rem;
 }
