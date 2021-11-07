@@ -18,19 +18,24 @@
 
 // calculations stonen from here: https://github.com/royalfig/fluid-typography-calculator/blob/master/index.js
 // numbers generated are ugly, should be rounded to float 2
-@each $name, $config in $config-typography {
+@each $name, $config in map-get($config-typography, 'tags') {
   $baseFontSize: map-get-plain($config, 'font-size');
-  $maxScreen: rem(map-get-plain($config, "font-size-fluid", "max", "screen") or $config-font-max-screen);
-  $minScreen: rem(map-get-plain($config, "font-size-fluid", "min", "screen") or $config-font-min-screen);
-  $maxFont: map-get-plain($config, "font-size-fluid", "max", "size") or map-get-plain($config, "font-size-fluid", "max");
-  $minFont: map-get-plain($config, "font-size-fluid", "min", "size") or map-get-plain($config, "font-size-fluid", "min");
+  $maxScreen: rem(map-get-plain($config, "font-size-fluid", "max", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'max-screen'));
+  $minScreen: rem(map-get-plain($config, "font-size-fluid", "min", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'min-screen'));
+  $maxFont: rem(map-get-plain($config, "font-size-fluid", "max", "size") or map-get-plain($config, "font-size-fluid", "max"));
+  $minFont: rem(map-get-plain($config, "font-size-fluid", "min", "size") or map-get-plain($config, "font-size-fluid", "min"));
 
   $factor: (math.div(1, ($maxScreen - $minScreen)) * ($maxFont - $minFont));
 
   $rem: $minFont - $minScreen * $factor;
   $vw: (100 * $factor) * 1vw;
 
+@debug '----- typography.scss : loop';
 @debug map-get-plain($config, 'selector');
+@debug 'factor: ', $factor;
+@debug 'rem: ', $rem;
+@debug 'vw: ', $vw;
+@debug clamp($minFont, calc($vw + $rem), $maxFont);
 
   %#{$name},
   #{map-get($config, 'selector')} {

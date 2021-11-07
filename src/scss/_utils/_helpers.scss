@@ -31,7 +31,7 @@
 
 // Change px to em
 @function em($value) {
-  $base_font: strip-unit($settings-font-base-size);
+  $base_font: strip-unit(map-get($config-typography, 'settings', 'base-size'));
   $pixels: strip-unit($value);
   $output: math.div($pixels, $base_font);
   @return $output * 1em;
@@ -39,11 +39,16 @@
 
 // Change px to rem
 @function rem($value) {
-  $unit: unit($value);
+  $unit: false;
+
+  @if type-of($value) == 'number' {
+    $unit: unit($value);
+  }
+
   @if ($unit == 'rem') {
     @return $value;
   } @else if ($unit == 'px') {
-    $base_font: strip-unit($settings-font-base-size);
+    $base_font: strip-unit(map-get($config-typography, 'settings', 'base-size'));
     $pixels: strip-unit($value);
     $output: math.div($pixels, $base_font);
     @return $output * 1rem;

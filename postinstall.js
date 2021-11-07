@@ -12,14 +12,14 @@ await fs.copy('src/scss', '../../scss', {
     });
     console.log(
       '\x1b[32m',
-      'Awesome! A new scss folder was added to your project. You are now ready to code something beautiful'
+      'OK! Styles have landed in your project, check scss folder.'
     );
     return true;
   } catch (error) {
     if (error.message.includes('already exists')) {
       console.log(
         '\x1b[36m',
-        'scss folder already exist. Complementary files were added to it. Happy coding'
+        'It looks like ./scss folder already exist. Complementary files were added to it. Happy coding'
       );
       return false;
     }

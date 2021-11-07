@@ -1,10 +1,13 @@
 {
-  "colors": [
-    { 
-      "name": "example",
-      "value": "#298374"
-    }
-  ],
+  "colors": { 
+    "_name": "value {any valid CSS color value.}",
+    "teal": "#298374",
+    "gold": "hsla(42,100%,46%,1)",
+    "indigo": "rgb(0, 73, 102)",
+    "ink-black": "#0b131e",
+    "white": "#fff",
+    "black": "hsl(0,0%,0%,1)"
+  },
   "layout": {
     "grid": {
       "gap": "1rem",
