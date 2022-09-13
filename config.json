@@ -1,52 +1,16 @@
 {
-  "colors": { 
-    "_name": "value {any valid CSS color value.}",
-    "teal": "#298374",
-    "gold": "hsla(42,100%,46%,1)",
-    "indigo": "rgb(0, 73, 102)",
-    "ink-black": "#0b131e",
-    "white": "#fff",
-    "black": "hsl(0,0%,0%,1)"
-  },
-  "layout": {
-    "grid": {
-      "gap": "1rem",
-      "max-width": "100vw",
-      "columns": "9",
-      "slots": [
-        {
-          "name": "outer",
-          "column-start": 1,
-          "column-end": 10
-        },
-        {
-          "name": "content-wide",
-          "column-start": 3,
-          "column-end": 7
-        },
-        {
-          "name": "content",
-          "column-start": 4,
-          "column-end": 6
-        }
-      ]
+  "source": ["src/tokens/*.json"],
+  "basePxFontSize": 16,
+  "platforms": {
+    "scss": {
+      "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "dimension/pxToRem", "color/hsla", "scss/deepMap"],
+      "buildPath": "src/scss/",
+      "files": [{
+        "destination": "tokens.scss",
+        "format": "scss/map-deep",
+        "filter": "noTypography"
+      }]
     }
-  },
-  "typography": {
-    "max-width": "700px",
-    "base-font-size": "16rem",
-    "base-font-color": "primary",
-    "tags": [
-      {
-        "name": "h1",
-        "font-family": "primary",
-        "font-size": "4rem",
-        "font-weight": "600",
-        "line-height": "1.5em",
-        "text-transform": "none",
-        "text-decoration": "none",
-        "color": "example"
-      }
-    ]
   }
 }
+

@@ -36,9 +36,16 @@
   $output: math.div($pixels, $base_font);
   @return $output * 1em;
 }
+// Number to rem
+@function rem($value) {
+  $base_font: config('baseFontSize');
+  $pixels: strip-unit($value);
+  $output: math.div($pixels, $base_font);
+  @return $output * 1rem;
+}
 
 // Change px to rem
-@function rem($value) {
+@function px-to-rem($value) {
   $unit: false;
 
   @if type-of($value) == 'number' {

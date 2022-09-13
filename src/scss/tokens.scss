@@ -1,0 +1,29 @@
+
+/**
+ * Do not edit directly
+ * Generated on Tue, 13 Sep 2022 15:55:26 GMT
+ */
+
+$color-dark-green: hsla(196,37%,24%,1.0) !default;
+$color-green: hsla(173,58%,39%,1.0) !default;
+$font-header-1-mobile: ("fontSize": 32, "textDecoration": underline, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-header-1-desktop: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-header-2-mobile: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-header-2-desktop: ("fontSize": 32, "textDecoration": none, "fontFamily": Lato, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+
+$tokens: (
+  'color': (
+    'dark-green': $color-dark-green,
+    'green': $color-green
+  ),
+  'font': (
+    'header 1': (
+      'mobile': $font-header-1-mobile,
+      'desktop': $font-header-1-desktop
+    ),
+    'header 2': (
+      'mobile': $font-header-2-mobile,
+      'desktop': $font-header-2-desktop
+    )
+  )
+);

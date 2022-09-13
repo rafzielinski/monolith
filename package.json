@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "tokens": "node ./transformTokens.js",
     "start": "parcel serve src/index.html --dist-dir dist",
     "postinstall": "node postinstall.js"
   },
@@ -17,6 +18,7 @@
     "postcss": "^8",
     "postcss-modules": "^3",
     "sass": "^1.32.8",
+    "style-dictionary": "^3",
     "stimulus": "^2.0.0"
   },
   "dependencies": {

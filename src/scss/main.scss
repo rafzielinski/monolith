@@ -4,10 +4,16 @@
 @import './_helpers';
 
 @import './config';
+@import './tokens';
 
-@import './variables';
-@import './grid';
+$breakpoints: (
+  typography: 700px
+);
+
+// @import './variables';
+// @import './grid';
 @import './typography';
 
-@import './_monolith';
+// @import './_monolith';
 
+h1 { @extend %header-1; }

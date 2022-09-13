@@ -16,45 +16,104 @@
   @return safe-unquote($value);
 }
 
+@function map-compare-font-props($map, $key) {
+  $val_m: map.get($map, 'mobile', $key);
+  $val_d: map.get($map, 'desktop', $key);
+
+  @return $val_m == $val_d;
+}
+
+$font-schema: (
+  fontFamily: 'font-family',
+  fontWeight: 'font-weight',
+  fontStyle: 'font-style',
+  fontStretch: 'font-stretch',
+  letterSpacing: 'letter-spacing',
+  textCase: 'text-transform',
+  textDecoration: 'text-decoration'
+);
+
+
 // calculations stonen from here: https://github.com/royalfig/fluid-typography-calculator/blob/master/index.js
 // numbers generated are ugly, should be rounded to float 2
-@each $name, $config in map-get($config-typography, 'tags') {
-  $baseFontSize: map-get-plain($config, 'font-size');
-  $maxScreen: rem(map-get-plain($config, "font-size-fluid", "max", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'max-screen'));
-  $minScreen: rem(map-get-plain($config, "font-size-fluid", "min", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'min-screen'));
-  $maxFont: rem(map-get-plain($config, "font-size-fluid", "max", "size") or map-get-plain($config, "font-size-fluid", "max"));
-  $minFont: rem(map-get-plain($config, "font-size-fluid", "min", "size") or map-get-plain($config, "font-size-fluid", "min"));
+@each $name, $font in token('font') {
+  // $baseFontSize: map-get-plain($config, 'font-size');
+  // $maxScreen: rem(map-get-plain($config, "font-size-fluid", "max", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'max-screen'));
+  // $minScreen: rem(map-get-plain($config, "font-size-fluid", "min", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'min-screen'));
+  // $maxFont: rem(map-get-plain($config, "font-size-fluid", "max", "size") or map-get-plain($config, "font-size-fluid", "max"));
+  // $minFont: rem(map-get-plain($config, "font-size-fluid", "min", "size") or map-get-plain($config, "font-size-fluid", "min"));
 
-  $factor: (math.div(1, ($maxScreen - $minScreen)) * ($maxFont - $minFont));
+  // $factor: (math.div(1, ($maxScreen - $minScreen)) * ($maxFont - $minFont));
+  //
+  // $rem: $minFont - $minScreen * $factor;
+  // $vw: (100 * $factor) * 1vw;
 
-  $rem: $minFont - $minScreen * $factor;
-  $vw: (100 * $factor) * 1vw;
+// @debug '----- typography.scss : loop';
+// @debug map-get-plain($config, 'selector');
+// @debug 'factor: ', $factor;
+// @debug 'rem: ', $rem;
+// @debug 'vw: ', $vw;
+// @debug clamp($minFont, calc($vw + $rem), $maxFont);
 
-@debug '----- typography.scss : loop';
-@debug map-get-plain($config, 'selector');
-@debug 'factor: ', $factor;
-@debug 'rem: ', $rem;
-@debug 'vw: ', $vw;
-@debug clamp($minFont, calc($vw + $rem), $maxFont);
+$sanitizedName: str-replace($name, ' ', '-');
 
-  %#{$name},
-  #{map-get($config, 'selector')} {
-    font-family: map-get-plain($config, 'font-family');
+@debug $sanitizedName;
+// @debug $font;
 
-    @if ($baseFontSize) {
-      font-size: rem($baseFontSize);
+  %#{$sanitizedName} {
+    @if (token('sizes', 'fluid')) {
+      font-size: clamp($minFont, calc($vw + $rem), $maxFont);
+      line-height: clamp($minFont, calc($vw + $rem), $maxFont);
     } @else {
-      font-size: $minFont;
+      font-size: rem(map.get($font, 'mobile', 'fontSize'));
+      line-height: math.div(map.get($font, 'mobile', 'lineHeight'), map.get($font, 'mobile', 'fontSize'));
+
+      @include screen(typography) {
+        font-size: rem(map.get($font, 'desktop', 'fontSize'));
+        line-height: math.div(map.get($font, 'desktop', 'lineHeight'), map.get($font, 'desktop', 'fontSize'));
+      }
     }
 
-    font-size: clamp($minFont, calc($vw + $rem), $maxFont);
-    line-height: map-get-plain($config, "line-height");
-    font-weight: map-get-plain($config, "font-weight");
-    color: map-get-plain($config, "color");
-    text-transform: map-get-plain($config, "text-transform");
-    text-decoration: map-get-plain($config, "text-decoration");
+    @each $key, $name in $font-schema {
+      @if (map-compare-font-props($font, 'textDecoration')) {
+        #{$name}: map.get($font, 'mobile', $key);
+      } @else {
+        #{$name}: map.get($font, 'mobile', $key);
 
-    @extend %#{$name}-custom-css !optional
+        @include screen(typography) {
+          #{$name}: map.get($font, 'desktop', $key);
+        }
+      }
+    }
+
+    // @if (map-compare-font-props($font, 'textDecoration')) {
+    //   text-decoration: map.get($font, 'mobile', 'textDecoration')
+    // } @else {
+    //   text-decoration: map.get($font, 'mobile', 'textDecoration');
+    //
+    //   @include screen(typography) {
+    //     text-decoration: map.get($font, 'desktop', 'textDecoration');
+    //   }
+    // }
+    //
+    // @if (map-compare-font-props($font, 'textDecoration')) {
+    //   text-decoration: map.get($font, 'mobile', 'textDecoration')
+    // } @else {
+    //   text-decoration: map.get($font, 'mobile', 'textDecoration');
+    //
+    //   @include screen(typography) {
+    //     text-decoration: map.get($font, 'desktop', 'textDecoration');
+    //   }
+    // }
+    //
+
+    // line-height: map-get-plain($config, "line-height");
+    // font-weight: map-get-plain($config, "font-weight");
+    // color: map-get-plain($config, "color");
+    // text-transform: map-get-plain($config, "text-transform");
+    // text-decoration: map-get-plain($config, "text-decoration");
+    //
+    // @extend %#{$name}-custom-css !optional
   }
 }
 

@@ -1,0 +1,9 @@
+@function config($keys...) {
+  $value: map-get($configs, $keys...);
+  @return $value;
+}
+
+@function token($keys...) {
+  $value: map-get($tokens, $keys...);
+  @return $value;
+}
