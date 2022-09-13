@@ -10,6 +10,19 @@ $breakpoints: (
   typography: 700px
 );
 
+$slots: (
+  color: (
+    page: (
+      background: color(white),
+      text: color(black)
+    ),
+    typography: (
+      h1: color(dark-green),
+      h2: color(green)
+    )
+  )
+);
+
 // @import './variables';
 // @import './grid';
 @import './typography';
@@ -17,3 +30,4 @@ $breakpoints: (
 // @import './_monolith';
 
 h1 { @extend %header-1; }
+h2 { @extend %header-2; }

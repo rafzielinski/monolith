@@ -18,10 +18,11 @@
     "postcss": "^8",
     "postcss-modules": "^3",
     "sass": "^1.32.8",
-    "style-dictionary": "^3",
-    "stimulus": "^2.0.0"
+    "stimulus": "^2.0.0",
+    "style-dictionary": "^3"
   },
   "dependencies": {
+    "css-purge": "^3.1.8",
     "fs-extra": "^9.0.0"
   }
 }

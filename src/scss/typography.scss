@@ -16,27 +16,101 @@
   @return safe-unquote($value);
 }
 
-@function map-compare-font-props($map, $key) {
-  $val_m: map.get($map, 'mobile', $key);
-  $val_d: map.get($map, 'desktop', $key);
+// @function map-compare-font-props($map, $key) {
+//   $val_m: map.get($map, 'mobile', $key);
+//   $val_d: map.get($map, 'desktop', $key);
+//
+//   @return $val_m == $val_d;
+// }
 
-  @return $val_m == $val_d;
+  $font-schema: (
+    fontFamily: 'font-family',
+    fontSize: 'font-size',
+    lineHeight: 'line-height',
+    fontWeight: 'font-weight',
+    fontStyle: 'font-style',
+    fontStretch: 'font-stretch',
+    letterSpacing: 'letter-spacing',
+    textCase: 'text-transform',
+    textDecoration: 'text-decoration'
+  );
+
+@function generate-font-attributes($font-map) {
+  $output: ();
+
+  @each $key, $name in $font-schema {
+    $value: map.get($font-map, $key);
+
+    @if ($name == 'font-size') {
+      @if (config('typography', 'fluid') and token('sizes', 'fluid')) {
+        // font-size: clamp($minFont, calc($vw + $rem), $maxFont);
+      } @else {
+        $output: map.set($output, $name, rem($value));
+      }
+    } @else if ($name == 'line-height') {
+       $output: map.set($output, $name, math.div($value, map.get($font-map, 'fontSize')));
+    } @else if ($name == 'letter-spacing') {
+      @debug map.get($font-map, "letterSpacing"); 
+    } @else {
+      $output: map.set($output, $name, $value);
+    }
+  }
+
+  @return $output;
 }
-
-$font-schema: (
-  fontFamily: 'font-family',
-  fontWeight: 'font-weight',
-  fontStyle: 'font-style',
-  fontStretch: 'font-stretch',
-  letterSpacing: 'letter-spacing',
-  textCase: 'text-transform',
-  textDecoration: 'text-decoration'
-);
 
 
 // calculations stonen from here: https://github.com/royalfig/fluid-typography-calculator/blob/master/index.js
 // numbers generated are ugly, should be rounded to float 2
-@each $name, $font in token('font') {
+
+@each $name, $font in token('font', 'mobile') {
+  $sanitizedName: str-replace($name, ' ', '-');
+  @debug $sanitizedName;
+
+  %#{$sanitizedName} {
+    @each $attr, $value in generate-font-attributes($font) {
+      #{$attr}: $value;
+    }
+  }
+}
+
+@include screen(typography) {
+  @each $name, $font in token('font', 'desktop') {
+    $sanitizedName: str-replace($name, ' ', '-');
+
+    %#{$sanitizedName} {
+      @each $attr, $value in generate-font-attributes($font) {
+        #{$attr}: $value;
+      }
+    }
+  }
+}
+
+
+
+
+    // @if (config('typography', 'fluid') && token('sizes', 'fluid')) {
+    //   font-size: clamp($minFont, calc($vw + $rem), $maxFont);
+    //   line-height: clamp($minFont, calc($vw + $rem), $maxFont);
+    // } @else {
+    //   font-size: rem(map.get($font, 'fontSize'));
+    //   line-height: math.div(map.get($font, 'lineHeight'), map.get($font, 'fontSize'));
+    // }
+    //
+    // @each $key, $name in $font-schema {
+    //   @if (map-compare-font-props($font, $key)) {
+    //     #{$name}: map.get($font, 'mobile', $key);
+    //   } @else {
+    //     #{$name}: map.get($font, 'mobile', $key);
+    //
+    //     @include screen(typography) {
+    //       #{$name}: map.get($font, 'desktop', $key);
+    //     }
+    //   }
+    // }
+//   }
+// }
+
   // $baseFontSize: map-get-plain($config, 'font-size');
   // $maxScreen: rem(map-get-plain($config, "font-size-fluid", "max", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'max-screen'));
   // $minScreen: rem(map-get-plain($config, "font-size-fluid", "min", "screen") or map-get($config-typography, 'settings', 'fluid-font', 'min-screen'));
@@ -55,65 +129,65 @@ $font-schema: (
 // @debug 'vw: ', $vw;
 // @debug clamp($minFont, calc($vw + $rem), $maxFont);
 
-$sanitizedName: str-replace($name, ' ', '-');
-
-@debug $sanitizedName;
-// @debug $font;
-
-  %#{$sanitizedName} {
-    @if (token('sizes', 'fluid')) {
-      font-size: clamp($minFont, calc($vw + $rem), $maxFont);
-      line-height: clamp($minFont, calc($vw + $rem), $maxFont);
-    } @else {
-      font-size: rem(map.get($font, 'mobile', 'fontSize'));
-      line-height: math.div(map.get($font, 'mobile', 'lineHeight'), map.get($font, 'mobile', 'fontSize'));
-
-      @include screen(typography) {
-        font-size: rem(map.get($font, 'desktop', 'fontSize'));
-        line-height: math.div(map.get($font, 'desktop', 'lineHeight'), map.get($font, 'desktop', 'fontSize'));
-      }
-    }
-
-    @each $key, $name in $font-schema {
-      @if (map-compare-font-props($font, 'textDecoration')) {
-        #{$name}: map.get($font, 'mobile', $key);
-      } @else {
-        #{$name}: map.get($font, 'mobile', $key);
-
-        @include screen(typography) {
-          #{$name}: map.get($font, 'desktop', $key);
-        }
-      }
-    }
-
-    // @if (map-compare-font-props($font, 'textDecoration')) {
-    //   text-decoration: map.get($font, 'mobile', 'textDecoration')
-    // } @else {
-    //   text-decoration: map.get($font, 'mobile', 'textDecoration');
-    //
-    //   @include screen(typography) {
-    //     text-decoration: map.get($font, 'desktop', 'textDecoration');
-    //   }
-    // }
-    //
-    // @if (map-compare-font-props($font, 'textDecoration')) {
-    //   text-decoration: map.get($font, 'mobile', 'textDecoration')
-    // } @else {
-    //   text-decoration: map.get($font, 'mobile', 'textDecoration');
-    //
-    //   @include screen(typography) {
-    //     text-decoration: map.get($font, 'desktop', 'textDecoration');
-    //   }
-    // }
-    //
-
-    // line-height: map-get-plain($config, "line-height");
-    // font-weight: map-get-plain($config, "font-weight");
-    // color: map-get-plain($config, "color");
-    // text-transform: map-get-plain($config, "text-transform");
-    // text-decoration: map-get-plain($config, "text-decoration");
-    //
-    // @extend %#{$name}-custom-css !optional
-  }
-}
+// $sanitizedName: str-replace($name, ' ', '-');
+//
+// @debug $sanitizedName;
+// // @debug $font;
+//
+//   %#{$sanitizedName} {
+//     @if (token('sizes', 'fluid')) {
+//       font-size: clamp($minFont, calc($vw + $rem), $maxFont);
+//       line-height: clamp($minFont, calc($vw + $rem), $maxFont);
+//     } @else {
+//       font-size: rem(map.get($font, 'mobile', 'fontSize'));
+//       line-height: math.div(map.get($font, 'mobile', 'lineHeight'), map.get($font, 'mobile', 'fontSize'));
+//
+//       @include screen(typography) {
+//         font-size: rem(map.get($font, 'desktop', 'fontSize'));
+//         line-height: math.div(map.get($font, 'desktop', 'lineHeight'), map.get($font, 'desktop', 'fontSize'));
+//       }
+//     }
+//
+//     @each $key, $name in $font-schema {
+//       @if (map-compare-font-props($font, $key)) {
+//         #{$name}: map.get($font, 'mobile', $key);
+//       } @else {
+//         #{$name}: map.get($font, 'mobile', $key);
+//
+//         @include screen(typography) {
+//           #{$name}: map.get($font, 'desktop', $key);
+//         }
+//       }
+//     }
+//
+//     // @if (map-compare-font-props($font, 'textDecoration')) {
+//     //   text-decoration: map.get($font, 'mobile', 'textDecoration')
+//     // } @else {
+//     //   text-decoration: map.get($font, 'mobile', 'textDecoration');
+//     //
+//     //   @include screen(typography) {
+//     //     text-decoration: map.get($font, 'desktop', 'textDecoration');
+//     //   }
+//     // }
+//     //
+//     // @if (map-compare-font-props($font, 'textDecoration')) {
+//     //   text-decoration: map.get($font, 'mobile', 'textDecoration')
+//     // } @else {
+//     //   text-decoration: map.get($font, 'mobile', 'textDecoration');
+//     //
+//     //   @include screen(typography) {
+//     //     text-decoration: map.get($font, 'desktop', 'textDecoration');
+//     //   }
+//     // }
+//     //
+//
+//     // line-height: map-get-plain($config, "line-height");
+//     // font-weight: map-get-plain($config, "font-weight");
+//     // color: map-get-plain($config, "color");
+//     // text-transform: map-get-plain($config, "text-transform");
+//     // text-decoration: map-get-plain($config, "text-decoration");
+//     //
+//     // @extend %#{$name}-custom-css !optional
+//   }
+// }
 
