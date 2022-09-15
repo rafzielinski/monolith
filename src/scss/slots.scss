@@ -1,0 +1,12 @@
+$slots: (
+  color: (
+    page: (
+      background: color(white),
+      text: color(black)
+    ),
+    typography: (
+      h1: color(dark-green),
+      h2: color(green)
+    )
+  )
+);

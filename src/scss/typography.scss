@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:string';
 
 @function safe-unquote($value) {
@@ -35,27 +36,49 @@
     textDecoration: 'text-decoration'
   );
 
-@function generate-font-attributes($font-map) {
+@function generate-font-attributes-map($font-name, $font-map) {
   $output: ();
 
   @each $key, $name in $font-schema {
     $value: map.get($font-map, $key);
 
-    @if ($name == 'font-size') {
-      @if (config('typography', 'fluid') and token('sizes', 'fluid')) {
-        // font-size: clamp($minFont, calc($vw + $rem), $maxFont);
+    @if ($name == 'font-family') {
+      // merging token font with a fallbacks defined in config
+      $font-fallback: config(typography, fontFallbacks, '#{$value}');
+      @if ($font-fallback) {
+        $combined-value: "#{$value}, #{$font-fallback}";
+        $output: map.set($output, $name, string.unquote($combined-value));
+      } @else {
+        $output: map.set($output, $name, $value);
+      }
+    } @else if ($name == 'font-size') {
+      @if (config(typography, fluid) and config(layout, breakpoints, typography-fluid) and list.index(config(typography, fluidExclude), $font-name) == null) {
+        $baseFontSize: config(typography, baseFontSize);
+
+        $minScreen: config(layout, breakpoints, typography-fluid, start);
+        $maxScreen: config(layout, breakpoints, typography-fluid, end);
+
+        $minFont: rem(token(font, mobile, $font-name, fontSize));
+        $maxFont: rem(token(font, desktop, $font-name, fontSize));
+
+        $factor: calc(calc(1 / calc($maxScreen - $minScreen)) * calc($maxFont - $minFont));
+
+        $rem: $minFont - $minScreen * $factor;
+        $vw: (100 * $factor) * 1vw;
+
+        $value: clamp($minFont, calc($vw + $rem), $maxFont);
+        $output: map.set($output, $name, $value);
       } @else {
         $output: map.set($output, $name, rem($value));
       }
     } @else if ($name == 'line-height') {
        $output: map.set($output, $name, math.div($value, map.get($font-map, 'fontSize')));
     } @else if ($name == 'letter-spacing') {
-      @debug map.get($font-map, "letterSpacing"); 
+      $output: map.set($output, $name, rem($value));
     } @else {
       $output: map.set($output, $name, $value);
     }
   }
-
   @return $output;
 }
 
@@ -65,10 +88,9 @@
 
 @each $name, $font in token('font', 'mobile') {
   $sanitizedName: str-replace($name, ' ', '-');
-  @debug $sanitizedName;
 
   %#{$sanitizedName} {
-    @each $attr, $value in generate-font-attributes($font) {
+    @each $attr, $value in generate-font-attributes-map($name, $font) {
       #{$attr}: $value;
     }
   }
@@ -79,7 +101,7 @@
     $sanitizedName: str-replace($name, ' ', '-');
 
     %#{$sanitizedName} {
-      @each $attr, $value in generate-font-attributes($font) {
+      @each $attr, $value in generate-font-attributes-map($name, $font) {
         #{$attr}: $value;
       }
     }

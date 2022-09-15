@@ -12,17 +12,17 @@
     "@babel/core": "^7.14.2",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.14.2",
-    "@parcel/transformer-sass": "2.0.0-rc.0",
-    "autoprefixer": "^9",
+    "@parcel/transformer-sass": "2.7.0",
+    "autoprefixer": "^10.4.10",
     "parcel": "^2.0.0-beta.1",
     "postcss": "^8",
-    "postcss-modules": "^3",
+    "postcss-modules": "^5.0.0",
     "sass": "^1.32.8",
-    "stimulus": "^2.0.0",
+    "stimulus": "^3.1.0",
     "style-dictionary": "^3"
   },
   "dependencies": {
     "css-purge": "^3.1.8",
-    "fs-extra": "^9.0.0"
+    "fs-extra": "^10.1.0"
   }
 }

@@ -1,9 +1,15 @@
 
 /**
  * Do not edit directly
- * Generated on Tue, 13 Sep 2022 23:41:18 GMT
+ * Generated on Wed, 14 Sep 2022 11:45:22 GMT
  */
 
+$breakpoints-typography: 57rem !default;
+$breakpoints-typography-fluid-end: 87.5rem !default;
+$breakpoints-typography-fluid-start: 31.25rem !default;
+$breakpoints-desktop: 80rem !default;
+$breakpoints-mobile: 48rem !default;
+$breakpoints-tablet: 64rem !default;
 $color-dark-green: hsla(196,37%,24%,1.0) !default;
 $color-green: hsla(173,58%,39%,1.0) !default;
 $font-desktop-header-1: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
@@ -12,6 +18,16 @@ $font-mobile-header-1: ("fontSize": 32, "textDecoration": none, "fontFamily": La
 $font-mobile-header-2: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 
 $tokens: (
+  'breakpoints': (
+    'typography': $breakpoints-typography,
+    'typography-fluid': (
+      'end': $breakpoints-typography-fluid-end,
+      'start': $breakpoints-typography-fluid-start
+    ),
+    'desktop': $breakpoints-desktop,
+    'mobile': $breakpoints-mobile,
+    'tablet': $breakpoints-tablet
+  ),
   'color': (
     'dark-green': $color-dark-green,
     'green': $color-green

@@ -8,6 +8,10 @@
       "files": [{
         "destination": "tokens.scss",
         "format": "scss/map-deep",
+        "options": {
+          "outputReferences": false,
+          "themable": false
+        },
         "filter": "noTypography"
       }]
     }

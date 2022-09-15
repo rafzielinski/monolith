@@ -1,3 +1,24 @@
+@use 'sass:map';
+
 $configs: (
-  baseFontSize: 16
+  typography: (
+    baseFontSize: 16, // value in px, unitless
+    fluid: true,
+    fluidExclude: ('header 2'),
+    fontFallbacks: ( // for keys use fontFamily /quoted/ as defined in tokens
+      'Lato': 'Arial, Verdana, sans-serif',
+      'Sofia Sans': 'Times New Roman, serif',
+    )
+  ),
+  layout: (
+    customBreakpoints: (
+      custom: 2000px
+    ),
+    breakpoints: ()
+  )
 );
+
+$configs: map.set($configs, layout, breakpoints, map.merge(token('breakpoints'), config(layout, customBreakpoints)));
+
+// @debug config(layout, breakpoints);
+// @debug $configs;

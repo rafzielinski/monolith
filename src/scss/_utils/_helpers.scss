@@ -38,7 +38,7 @@
 }
 // Number to rem
 @function rem($value) {
-  $base_font: config('baseFontSize');
+  $base_font: config('typography', 'baseFontSize');
   $pixels: strip-unit($value);
   $output: math.div($pixels, $base_font);
   @return $output * 1rem;

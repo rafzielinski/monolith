@@ -3,25 +3,9 @@
 @import './_utils';
 @import './_helpers';
 
-@import './config';
 @import './tokens';
-
-$breakpoints: (
-  typography: 700px
-);
-
-$slots: (
-  color: (
-    page: (
-      background: color(white),
-      text: color(black)
-    ),
-    typography: (
-      h1: color(dark-green),
-      h2: color(green)
-    )
-  )
-);
+@import './config';
+@import './slots';
 
 // @import './variables';
 // @import './grid';

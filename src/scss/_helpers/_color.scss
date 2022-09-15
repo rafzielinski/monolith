@@ -1,26 +1,12 @@
+@use 'sass:map';
+
 // COLOR - helper function
 // ---
 // This function would help you get values out of $settings-colors map.
 //
 // Usage: color('name')
 //
-@function color($key, $fade-in: null, $fade-out: null) {
-  @if $fade-in {
-    @return fade-in(map-get($tokens, 'color', $key), $fade-in);
-  } @else if $fade-out {
-    @return fade-out(map-get($tokens, 'color', $key), $fade-out);
-  } @else {
-    @return map-get($tokens, 'color', $key);
-  }
-}
-
-// GREY - helper function
-// ---
-// This function would help you get values out of $settings-grey-scale map.
-//
-// Usage: grey('name')
-//
-@function grey($key) {
-  @return map-get($settings-grey-scale, $key);
+@function color($key) {
+  @return map.get($tokens, 'color', $key);
 }
 
