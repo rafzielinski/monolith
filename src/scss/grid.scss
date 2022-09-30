@@ -1,35 +1,57 @@
-%layout-grid {
-  --grid-free-space: minmax(0, calc((var(--grid-width) - var(--grid-outer-width) - var(--grid-gap) * 2 ) / 2)); 
+@mixin grid($name: main) {
+  $grid-columns: token(grid, $name, count);
+  $grid-gap: rem(token(grid, $name, gutterSize));
+  $grid-free-space: minmax(0, calc((100vw - token(sizes, grid, $name, width) - ($grid-gap * 2)) / 2));
 
   display: grid;
   grid-template-columns: 
-    var(--grid-free-space)
-    repeat(var(--grid-columns), 1fr)
-    var(--grid-free-space);
-  grid-gap: var(--grid-gap);
+    #{$grid-free-space}
+    repeat(token(grid, $name, count), 1fr)
+    #{$grid-free-space};
 
-  margin: 0 auto;
+  column-gap: $grid-gap;
 
-  width: var(--grid-width);
+  width: 100%;
   height: auto;
 }
 
-.layout__grid {
-  @extend %layout-grid;
+@mixin grid-slot($name) {
+  grid-column: unquote(slot(grid, $name));
+}
 
-  padding: 5rem 0;
+.layout__grid {
+  @include grid;
+
+  height: 500px;
+  background-color: pink;
+}
+
+.layout__grid-alt {
+  @include grid(alt);
+
+  height: 500px;
+  background-color: yellow;
 }
 
 .layout__item-outer {
-  grid-column: 2 / calc(var(--grid-columns) + 2);
+  @include grid-slot(wide);
+
+  height: 100px;
+  background-color: lime;
 }
 
 .layout__item-inner {
-  grid-column: 3 / calc(var(--grid-columns) + 1);
+  @include grid-slot(component);
+
+  height: 100px;
+  background-color: blue;
 }
 
 .layout__item-content {
-  grid-column: 4 / calc(var(--grid-columns));
+  @include grid-slot(text);
+
+  height: 100px;
+  background-color: red;
 }
 
 

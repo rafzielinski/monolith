@@ -9,3 +9,8 @@
   $value: map.get($tokens, $keys...);
   @return $value;
 }
+
+@function slot($keys...) {
+  $value: map.get($slots, $keys...);
+  @return $value;
+}

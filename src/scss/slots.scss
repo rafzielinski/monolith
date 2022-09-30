@@ -8,5 +8,11 @@ $slots: (
       h1: color(dark-green),
       h2: color(green)
     )
+  ),
+  grid: (
+    full: '1 / -1',
+    wide: '2 / -2',
+    component: '3 / -3',
+    text: '3 / span 4'
   )
 );

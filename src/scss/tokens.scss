@@ -1,23 +1,58 @@
 
 /**
  * Do not edit directly
- * Generated on Wed, 14 Sep 2022 11:45:22 GMT
+ * Generated on Fri, 30 Sep 2022 14:07:53 GMT
  */
 
+$sizes-40: 2.5rem !default;
+$sizes-60: 3.75rem !default;
+$sizes-80: 5rem !default;
+$sizes-large: 5rem !default;
+$sizes-component-desktop: 8rem !default;
+$sizes-component-mobile: 5rem !default;
+$sizes-grid-main-width: 87.5rem !default;
+$sizes-grid-alt-width: 50rem !default;
+$size-big: 10.1875rem !default;
 $breakpoints-typography: 57rem !default;
 $breakpoints-typography-fluid-end: 87.5rem !default;
 $breakpoints-typography-fluid-start: 31.25rem !default;
 $breakpoints-desktop: 80rem !default;
 $breakpoints-mobile: 48rem !default;
 $breakpoints-tablet: 64rem !default;
+$breakpoints-navigation: 64rem !default;
+$radius-default-mobile: ("smoothing": 0, "topLeft": 8, "topRight": 8, "bottomLeft": 8, "bottomRight": 8) !default;
+$radius-default-desktop: ("smoothing": 0, "topLeft": 20, "topRight": 20, "bottomLeft": 20, "bottomRight": 20) !default;
 $color-dark-green: hsla(196,37%,24%,1.0) !default;
 $color-green: hsla(173,58%,39%,1.0) !default;
+$grid-main: ("pattern": columns, "gutterSize": 16, "alignment": stretch, "count": 12, "offset": 0) !default;
+$grid-alt: ("pattern": columns, "gutterSize": 0, "alignment": stretch, "count": 5, "offset": 0) !default;
 $font-desktop-header-1: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-desktop-header-2: ("fontSize": 32, "textDecoration": none, "fontFamily": Sofia Sans, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 3.84, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-mobile-header-1: ("fontSize": 32, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-mobile-header-2: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 
 $tokens: (
+  'sizes': (
+    '40': $sizes-40,
+    '60': $sizes-60,
+    '80': $sizes-80,
+    'large': $sizes-large,
+    'component': (
+      'desktop': $sizes-component-desktop,
+      'mobile': $sizes-component-mobile
+    ),
+    'grid': (
+      'main': (
+        'width': $sizes-grid-main-width
+      ),
+      'alt': (
+        'width': $sizes-grid-alt-width
+      )
+    )
+  ),
+  'size': (
+    'big': $size-big
+  ),
   'breakpoints': (
     'typography': $breakpoints-typography,
     'typography-fluid': (
@@ -26,11 +61,22 @@ $tokens: (
     ),
     'desktop': $breakpoints-desktop,
     'mobile': $breakpoints-mobile,
-    'tablet': $breakpoints-tablet
+    'tablet': $breakpoints-tablet,
+    'navigation': $breakpoints-navigation
+  ),
+  'radius': (
+    'default': (
+      'mobile': $radius-default-mobile,
+      'desktop': $radius-default-desktop
+    )
   ),
   'color': (
     'dark-green': $color-dark-green,
     'green': $color-green
+  ),
+  'grid': (
+    'main': $grid-main,
+    'alt': $grid-alt
   ),
   'font': (
     'desktop': (
