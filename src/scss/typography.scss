@@ -15,6 +15,8 @@ $font-schema: (
   textDecoration: 'text-decoration'
 );
 
+$typography-map: ();
+
 @function generate-font-attributes-map($font-name, $font-map) {
   $output: ();
 
@@ -37,7 +39,7 @@ $font-schema: (
         $minScreen: config(layout, breakpoints, typography-fluid, start);
         $maxScreen: config(layout, breakpoints, typography-fluid, end);
 
-        $minFont: rem(token(font, mobile, $font-name, fontSize));
+        $minFont: rem(token(font, default, $font-name, fontSize));
         $maxFont: rem(token(font, desktop, $font-name, fontSize));
 
         $factor: calc(calc(1 / calc($maxScreen - $minScreen)) * calc($maxFont - $minFont));
@@ -61,28 +63,28 @@ $font-schema: (
   @return $output;
 }
 
-// calculations stonen from here: https://github.com/royalfig/fluid-typography-calculator/blob/master/index.js
-// numbers generated are ugly, should be rounded to float 2
+// Parse token fonts map into typography map for use in a mixin
+@each $screen, $map in token('font') {
+  @each $name, $font in $map {
+    $sanitizedName: str-replace($name, ' ', '-');
 
-@each $name, $font in token('font', 'mobile') {
-  $sanitizedName: str-replace($name, ' ', '-');
-
-  %#{$sanitizedName} {
-    @each $attr, $value in generate-font-attributes-map($name, $font) {
-      #{$attr}: $value;
-    }
+    $typography-map: map.set($typography-map, $sanitizedName, $screen, generate-font-attributes-map($name, $font));
   }
 }
 
-@include screen(typography) {
-  @each $name, $font in token('font', 'desktop') {
-    $sanitizedName: str-replace($name, ' ', '-');
-
-    %#{$sanitizedName} {
-      @each $attr, $value in generate-font-attributes-map($name, $font) {
+// Generates font styles with all breakpoints that were defined in the Figma
+@mixin typography($name) {
+  @each $screen, $styles in map.get($typography-map, $name) {
+    @if ($screen == 'default') {
+      @each $attr, $value in $styles {
         #{$attr}: $value;
+      }
+    } @else {
+      @include screen($screen) {
+        @each $attr, $value in $styles {
+          #{$attr}: $value;
+        }
       }
     }
   }
 }
-

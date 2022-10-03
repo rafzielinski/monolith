@@ -1,0 +1,9 @@
+@function size($keys...) {
+  $size: token('sizes', $keys...);
+
+  @if (type-of($size) == 'map') {
+    @error 'No value selected. You need to select deeper keys. Keys available: #{map-keys($size)}';
+  } @else {
+    @return $size;
+  }
+}

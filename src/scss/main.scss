@@ -1,17 +1,17 @@
 @import './reset';
 
-@import './_utils';
 @import './_helpers';
+@import './_utils';
 
 @import './tokens';
 @import './config';
+
 @import './slots';
 
 // @import './variables';
 @import './grid';
 @import './typography';
 
-// @import './_monolith';
-
-h1 { @extend %header-1; }
-h2 { @extend %header-2; }
+h1 {
+  @include typography(header-1); 
+}

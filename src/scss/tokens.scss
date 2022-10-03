@@ -1,18 +1,13 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 30 Sep 2022 14:07:53 GMT
+ * Generated on Mon, 03 Oct 2022 15:09:58 GMT
  */
 
-$sizes-40: 2.5rem !default;
-$sizes-60: 3.75rem !default;
-$sizes-80: 5rem !default;
-$sizes-large: 5rem !default;
 $sizes-component-desktop: 8rem !default;
 $sizes-component-mobile: 5rem !default;
 $sizes-grid-main-width: 87.5rem !default;
 $sizes-grid-alt-width: 50rem !default;
-$size-big: 10.1875rem !default;
 $breakpoints-typography: 57rem !default;
 $breakpoints-typography-fluid-end: 87.5rem !default;
 $breakpoints-typography-fluid-start: 31.25rem !default;
@@ -26,17 +21,13 @@ $color-dark-green: hsla(196,37%,24%,1.0) !default;
 $color-green: hsla(173,58%,39%,1.0) !default;
 $grid-main: ("pattern": columns, "gutterSize": 16, "alignment": stretch, "count": 12, "offset": 0) !default;
 $grid-alt: ("pattern": columns, "gutterSize": 0, "alignment": stretch, "count": 5, "offset": 0) !default;
+$font-default-header-1: ("fontSize": 32, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-default-header-2: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-desktop-header-1: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-desktop-header-2: ("fontSize": 32, "textDecoration": none, "fontFamily": Sofia Sans, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 3.84, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-mobile-header-1: ("fontSize": 32, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-mobile-header-2: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 
 $tokens: (
   'sizes': (
-    '40': $sizes-40,
-    '60': $sizes-60,
-    '80': $sizes-80,
-    'large': $sizes-large,
     'component': (
       'desktop': $sizes-component-desktop,
       'mobile': $sizes-component-mobile
@@ -49,9 +40,6 @@ $tokens: (
         'width': $sizes-grid-alt-width
       )
     )
-  ),
-  'size': (
-    'big': $size-big
   ),
   'breakpoints': (
     'typography': $breakpoints-typography,
@@ -79,13 +67,13 @@ $tokens: (
     'alt': $grid-alt
   ),
   'font': (
+    'default': (
+      'header 1': $font-default-header-1,
+      'header 2': $font-default-header-2
+    ),
     'desktop': (
       'header 1': $font-desktop-header-1,
       'header 2': $font-desktop-header-2
-    ),
-    'mobile': (
-      'header 1': $font-mobile-header-1,
-      'header 2': $font-mobile-header-2
     )
   )
 );

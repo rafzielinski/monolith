@@ -2,7 +2,7 @@
 
 $configs: (
   typography: (
-    baseFontSize: 16, // value in px, unitless
+    baseFontSize: 16,
     fluid: true,
     fluidExclude: ('header 2'),
     fontFallbacks: ( // for keys use fontFamily /quoted/ as defined in tokens
@@ -11,23 +11,13 @@ $configs: (
     )
   ),
   layout: (
-    breakpoints: (
-      mobile: token(breakpoints, mobile),
-      tablet: token(breakpoints, tablet),
-      desktop: token(breakpoints, desktop),
-      typography: token(breakpoints, typography),
-      typography-fluid-end: token(breakpoints, typography-fluid, end),
-      typography-fluid-start: token(breakpoints, typography-fluid, start),
+    breakpoints: (),
+    customBreakpoints: (
       custom: 2000px
     ),
-    // customBreakpoints: (
-    //   custom: 2000px
-    // ),
   )
 );
 
 // Populate breakpoints from tokens and customBreakpoints map
-// $configs: map.set($configs, layout, breakpoints, map.merge(token('breakpoints'), config(layout, customBreakpoints)));
+$configs: map.set($configs, layout, breakpoints, map.merge(token(breakpoints), config(layout, customBreakpoints)));
 
-// @debug config(layout, breakpoints);
-// @debug $configs;

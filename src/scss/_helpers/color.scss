@@ -1,0 +1,4 @@
+@function color($key) {
+  @return token('color', $key);
+}
+
