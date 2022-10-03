@@ -1,5 +1,11 @@
 @use 'sass:map';
 
+@function map-get-plain($map, $keys...) {
+  $value: map.get($map, $keys...);
+
+  @return safe-unquote($value);
+}
+
 @function config($keys...) {
   $value: map.get($configs, $keys...);
   @return $value;

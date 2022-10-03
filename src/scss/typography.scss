@@ -3,20 +3,6 @@
 @use 'sass:list';
 @use 'sass:string';
 
-@function safe-unquote($value) {
-  @if (type-of($value) == string) {
-    @return string.unquote($value);
-  } @else {
-    @return $value;
-  }
-}
-
-@function map-get-plain($map, $keys...) {
-  $value: map.get($map, $keys...);
-
-  @return safe-unquote($value);
-}
-
 $font-schema: (
   fontFamily: 'font-family',
   fontSize: 'font-size',

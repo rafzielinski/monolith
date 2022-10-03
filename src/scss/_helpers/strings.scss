@@ -13,3 +13,11 @@
 
   @return $string;
 }
+
+@function safe-unquote($value) {
+  @if (type-of($value) == string) {
+    @return string.unquote($value);
+  } @else {
+    @return $value;
+  }
+}
