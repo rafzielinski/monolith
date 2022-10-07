@@ -1,28 +1,2 @@
-:root {
-  // Color
-  --color-primary: var(--config-color-indigo);
-  --color-secondary: var(--config-color-ink-black);
-  --color-accent: var(--config-color-gold);
-  --color-accent-match: var(--config-color-ink-black);
-  --color-light: var(--config-color-white);
-  --color-dark: var(--config-color-black);
-
-  --color-shadow-1: #{color(ink-black, $fade-out: .25)};
-
-  // --grey-1: var(--config-color-grey);
-
-  // Shadow
-  --shadow-1: 0 .05rem .5rem 0 var(--color-shadow-1);
-
-  // Spacings
-  --space: 1rem;
-
-  // Breakpoints
-  --bp-tiny: 350px;
-  --bp-small: 500px;
-  --bp-medium: 768px;
-  --bp-large: 1024px;
-  --bp-xlarge: 1200px;
-  --bp-huge: 1400px;
-}
+:root {}
 

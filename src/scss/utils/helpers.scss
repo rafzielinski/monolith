@@ -12,13 +12,18 @@
 }
 
 // Change px to em
+// @param {Number} $value - Value in px or unitless
+// @return {Number} - Value in em
 @function em($value) {
-  $base_font: strip-unit(map-get($config-typography, 'settings', 'base-size'));
+  $base_font: config('typography', 'baseFontSize');
   $pixels: strip-unit($value);
   $output: math.div($pixels, $base_font);
   @return $output * 1em;
 }
+
 // Number to rem
+// @param {Number} $value - Value in px or unitless
+// @return {Number} - Value in rem
 @function rem($value) {
   $base_font: config('typography', 'baseFontSize');
   $pixels: strip-unit($value);
@@ -37,10 +42,7 @@
   @if ($unit == 'rem') {
     @return $value;
   } @else if ($unit == 'px') {
-    $base_font: strip-unit(map-get($config-typography, 'settings', 'base-size'));
-    $pixels: strip-unit($value);
-    $output: math.div($pixels, $base_font);
-    @return $output * 1rem;
+    @return rem($value);
   } @else {
     @return false;
   }
@@ -56,19 +58,10 @@
   @return if(strip-unit($value) < strip-unit($min), $min, $value);
 }
 
-@function v($var, $fallback: null) {
-  @if($fallback) {
-    @return var(--#{safe-unquote($var)}, #{$fallback});
-  } @else {
-    @return var(--#{safe-unvuote($var)});
-  }
-}
-
-/// toFixed() function in Sass
-/// @author Kitty Giraudel
-/// @param {Number} $float - Number to format
-/// @param {Number} $digits [2] - Number of digits to leave
-/// @return {Number}
+// toFixed() function in Sass
+// @param {Number} $float - Number to format
+// @param {Number} $digits [2] - Number of digits to leave
+// @return {Number}
 @function to-fixed($float, $digits: 2) {
   $sass-precision: 5;
   
