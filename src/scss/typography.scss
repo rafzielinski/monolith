@@ -15,7 +15,40 @@ $font-schema: (
   textDecoration: 'text-decoration'
 );
 
-$typography-map: ();
+@function generate-fluid-typography-value($font-name) {
+  $baseFontSize: config(typography, baseFontSize);
+
+  $rangeStart: breakpoint(config(typography, fluid, range, start));
+  $rangeEnd: breakpoint(config(typography, fluid, range, end));
+
+  @debug $font-name;
+  @debug $rangeStart, $rangeEnd;
+
+  @if (type-of(config(typography, fluid, $font-name, range)) == 'map') {
+    @if (map.has-key(config(typography, fluid, $font-name, range), start)) {
+      $rangeStart: breakpoint(config(typography, fluid, $font-name, range, start));
+    }
+
+    @if (map.has-key(config(typography, fluid, $font-name, range), end)) {
+      $rangeEnd: breakpoint(config(typography, fluid, $font-name, range, end));
+    }
+  }
+
+  $fontSizeStart: rem(token(font, config(typography, fluid, styles, start), $font-name, fontSize));
+  $fontSizeEnd: rem(token(font, config(typography, fluid, styles, end), $font-name, fontSize));
+
+  @debug $fontSizeStart, $fontSizeEnd;
+
+  $factor: calc(calc(1 / calc($rangeEnd - $rangeStart)) * calc($maxFont - $minFont));
+
+  $rem: $minFont - $rangeStart * $factor;
+  $vw: (100 * $factor) * 1vw;
+
+  $value: clamp($minFont, calc($vw + $rem), $maxFont);
+
+
+  @return $value;
+}
 
 @function generate-font-attributes-map($font-name, $font-map) {
   $output: ();
@@ -33,22 +66,29 @@ $typography-map: ();
         $output: map.set($output, $name, $value);
       }
     } @else if ($name == 'font-size') {
-      @if (config(typography, fluid) and config(layout, breakpoints, typography-fluid) and list.index(config(typography, fluidExclude), $font-name) == null) {
-        $baseFontSize: config(typography, baseFontSize);
+      // @debug $font-name;
+      // @debug map.has-key(config(typography), fluid);
+      // @debug map.has-key(config(typography, fluid, tags), $font-name);
 
-        $minScreen: config(layout, breakpoints, typography-fluid, start);
-        $maxScreen: config(layout, breakpoints, typography-fluid, end);
+      @if (map.has-key(config(typography), fluid) and map.has-key(config(typography, fluid, tags), $font-name)) {
+        // @if (config(typography, fluid) and config(layout, breakpoints, typography-fluid) and list.index(config(typography, fluidExclude), $font-name) == null) {
+        // $baseFontSize: config(typography, baseFontSize);
+        //
+        // $minScreen: config(layout, breakpoints, typography-fluid, start);
+        // $maxScreen: config(layout, breakpoints, typography-fluid, end);
+        //
+        // $minFont: rem(token(font, default, $font-name, fontSize));
+        // $maxFont: rem(token(font, desktop, $font-name, fontSize));
+        //
+        // $factor: calc(calc(1 / calc($maxScreen - $minScreen)) * calc($maxFont - $minFont));
+        //
+        // $rem: $minFont - $minScreen * $factor;
+        // $vw: (100 * $factor) * 1vw;
+        //
+        // $value: clamp($minFont, calc($vw + $rem), $maxFont);
 
-        $minFont: rem(token(font, default, $font-name, fontSize));
-        $maxFont: rem(token(font, desktop, $font-name, fontSize));
-
-        $factor: calc(calc(1 / calc($maxScreen - $minScreen)) * calc($maxFont - $minFont));
-
-        $rem: $minFont - $minScreen * $factor;
-        $vw: (100 * $factor) * 1vw;
-
-        $value: clamp($minFont, calc($vw + $rem), $maxFont);
-        $output: map.set($output, $name, $value);
+        @debug generate-fluid-typography-value($font-name);
+        // $output: map.set($output, $name, $value);
       } @else {
         $output: map.set($output, $name, rem($value));
       }
@@ -62,6 +102,8 @@ $typography-map: ();
   }
   @return $output;
 }
+
+$typography-map: ();
 
 // Parse token fonts map into typography map for use in a mixin
 @each $screen, $map in token('font') {

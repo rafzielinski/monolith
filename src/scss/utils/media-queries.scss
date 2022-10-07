@@ -1,5 +1,5 @@
 @mixin screen($size, $mode: null, $type: min) {
-  $breakpoint: config(layout, breakpoints, $size);
+  $breakpoint: breakpoint($size);
 
   @if $mode {
     @media only screen and ($type + -width: $breakpoint) and (orientation: $mode) {
@@ -13,7 +13,7 @@
 }
 
 @mixin screen-beetwen($min-size, $max-size) {
-  @media only screen and (min-width: config(layout, breakpoints, $min-size)) and (max-width: config(layout, breakpoints, $max-size) - 1) {
+  @media only screen and (min-width: breakpoint($min-size)) and (max-width: breakpoint($max-size) - 1) {
     @content;
   }
 }

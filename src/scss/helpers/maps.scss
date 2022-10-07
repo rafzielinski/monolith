@@ -20,3 +20,8 @@
   $value: map.get($slots, $keys...);
   @return $value;
 }
+
+@function breakpoint($keys...) {
+  $value: token(breakpoints, $keys...);
+  @return $value;
+}
