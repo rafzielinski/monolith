@@ -14,6 +14,7 @@
     "@babel/preset-env": "^7.14.2",
     "@parcel/transformer-sass": "2.7.0",
     "autoprefixer": "^10.4.10",
+    "env2": "^2.2.2",
     "gently-copy": "^3.2.0",
     "parcel": "^2.0.0-beta.1",
     "postcss": "^8",

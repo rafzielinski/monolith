@@ -31,6 +31,7 @@ const fs = require('fs-extra');
 async function copyFiles() {
   const src = 'src/scss'
   const cwd = process.env.INIT_CWD
+  const env = require('env2')(cwd + '/.env');
   const userPath = process.env.MONO_LOCAL_PATH + '/mono/'
   const dest = cwd + '/' + userPath
   try {
@@ -47,7 +48,7 @@ async function copyFiles() {
     if (error.message.includes('already exists')) {
       console.log(
         '\x1b[36m',
-        `It looks like ${userPath} folder already exist. Complementary files were added to it.`
+        `It looks like ${userPath} folder already exist. Complementary files were added to it. Use MONO_OVERWRITE=true to overwrite files.`
       );
       return false;
     }
