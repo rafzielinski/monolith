@@ -1,21 +1,18 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 07 Oct 2022 12:32:25 GMT
+ * Generated on Fri, 14 Oct 2022 13:22:34 GMT
  */
 
 $sizes-component-desktop: 8rem !default;
 $sizes-component-mobile: 5rem !default;
 $sizes-grid-main-width: 87.5rem !default;
 $sizes-grid-alt-width: 63.75rem !default;
-$breakpoints-typography: 57rem !default;
-$breakpoints-typography-fluid-end: 87.5rem !default;
-$breakpoints-typography-fluid-start: 31.25rem !default;
 $breakpoints-desktop: 80rem !default;
 $breakpoints-mobile: 48rem !default;
 $breakpoints-tablet: 64rem !default;
 $breakpoints-navigation: 64rem !default;
-$radius-default-mobile: ("smoothing": 0, "topLeft": 8, "topRight": 8, "bottomLeft": 8, "bottomRight": 8) !default;
+$radius-default-mobile: ("smoothing": 0, "topLeft": 10, "topRight": 16, "bottomLeft": 0, "bottomRight": 8) !default;
 $radius-default-desktop: ("smoothing": 0, "topLeft": 20, "topRight": 20, "bottomLeft": 20, "bottomRight": 20) !default;
 $color-dark-green: hsla(196,37%,24%,1.0) !default;
 $color-green: hsla(173,58%,39%,1.0) !default;
@@ -23,9 +20,13 @@ $grid-main: ("pattern": columns, "gutterSize": 16, "alignment": stretch, "count"
 $grid-alt: ("pattern": columns, "gutterSize": 4, "alignment": stretch, "count": 7, "offset": 0) !default;
 $font-default-header-1: ("fontSize": 32, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-default-header-2: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-desktop-header-1: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-desktop-header-2: ("fontSize": 32, "textDecoration": none, "fontFamily": Sofia Sans, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 3.84, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-tablet-header-1: ("fontSize": 128, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 153.6, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-default-header-3: ("fontSize": 16, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 19.2, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-desktop-header-1: ("fontSize": 128, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 38.4, "lineHeight": 153.6, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-desktop-header-3: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 9.6, "lineHeight": 100, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-tablet-header-1: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 6.4, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-tablet-header-2: ("fontSize": 32, "textDecoration": none, "fontFamily": Sofia Sans, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 3.84, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$effect-drop-shadow: ("shadowType": dropShadow, "radius": 8, "color": #0000001a, "offsetX": 0, "offsetY": 4, "spread": 0) !default;
+$effect-inner-shadow: ("shadowType": innerShadow, "radius": 4, "color": #00000080, "offsetX": 0, "offsetY": 4, "spread": 0) !default;
 
 $tokens: (
   'sizes': (
@@ -43,11 +44,6 @@ $tokens: (
     )
   ),
   'breakpoints': (
-    'typography': $breakpoints-typography,
-    'typography-fluid': (
-      'end': $breakpoints-typography-fluid-end,
-      'start': $breakpoints-typography-fluid-start
-    ),
     'desktop': $breakpoints-desktop,
     'mobile': $breakpoints-mobile,
     'tablet': $breakpoints-tablet,
@@ -70,14 +66,20 @@ $tokens: (
   'font': (
     'default': (
       'header 1': $font-default-header-1,
-      'header 2': $font-default-header-2
+      'header 2': $font-default-header-2,
+      'header 3': $font-default-header-3
     ),
     'desktop': (
       'header 1': $font-desktop-header-1,
-      'header 2': $font-desktop-header-2
+      'header 3': $font-desktop-header-3
     ),
     'tablet': (
-      'header 1': $font-tablet-header-1
+      'header 1': $font-tablet-header-1,
+      'header 2': $font-tablet-header-2
     )
+  ),
+  'effect': (
+    'drop shadow': $effect-drop-shadow,
+    'inner shadow': $effect-inner-shadow
   )
 );

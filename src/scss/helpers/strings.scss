@@ -1,5 +1,6 @@
+@use 'sass:string';
+
 /// Replace `$search` with `$replace` in `$string`
-/// @author Hugo Giraudel
 /// @param {String} $string - Initial string
 /// @param {String} $search - Substring to replace
 /// @param {String} $replace ('') - New value
@@ -20,4 +21,12 @@
   } @else {
     @return $value;
   }
+}
+
+@function sanitize($string) {
+  // change spaces to dashes
+  $sanitizedString: str-replace($string, ' ', '-');
+  // remove keywords
+  $sanitizedString: str-replace($sanitizedString, '-fluid', '');
+  @return $sanitizedString;
 }

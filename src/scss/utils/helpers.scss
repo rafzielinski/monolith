@@ -1,5 +1,9 @@
 @use 'sass:math';
 
+@function is-not-rem($value) {
+  @return is-number($value) and index('cm' 'mm' 'in' 'px' 'pt' 'pc', unit($value)) != null;
+}
+
 // Remove the unit of a length
 // @param {Number} $number - Number to remove unit from
 // @return {Number} - Unitless number
@@ -41,7 +45,7 @@
 
   @if ($unit == 'rem') {
     @return $value;
-  } @else if ($unit == 'px') {
+  } @else if ($unit == 'px' or $unit == '') {
     @return rem($value);
   } @else {
     @return false;

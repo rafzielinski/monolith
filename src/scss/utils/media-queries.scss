@@ -1,15 +1,20 @@
 @mixin screen($size, $mode: null, $type: min) {
   $breakpoint: breakpoint($size);
 
-  @if $mode {
-    @media only screen and ($type + -width: $breakpoint) and (orientation: $mode) {
-      @content;
-    }
+  @if ($size == 'default') {
+    @content;
   } @else {
-    @media only screen and ($type + -width: $breakpoint) {
-      @content;
+    @if $mode {
+      @media only screen and ($type + -width: $breakpoint) and (orientation: $mode) {
+        @content;
+      }
+    } @else {
+      @media only screen and ($type + -width: $breakpoint) {
+        @content;
+      }
     }
   }
+
 }
 
 @mixin screen-beetwen($min-size, $max-size) {

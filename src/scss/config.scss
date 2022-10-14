@@ -17,24 +17,25 @@ $configs: (
         end: desktop
       ),
       tags: (
-        'header 1': true,
+        // 'header 1': true,
         'header 2': (
           styles: (
             end: (
-              font-size: 5rem,
-              line-height: 1.5,
-              letter-spacing: 4px
+              font-size: 3rem,
+              line-height: 6rem,
+              letter-spacing: .25rem
             )
           ),
+        ),
+        'header 3': (
           range: (
-            start: tablet
+            end: desktop
           )
-        )
+        ),
       )
     ),
   ),
   layout: (
-    // breakpoints: (),
     customBreakpoints: (
       custom: 2000px
     ),

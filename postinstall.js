@@ -1,3 +1,27 @@
+// #<{(|*
+//  * Script to run after npm install
+//  *
+//  * Copy selected files to user's directory
+//  |)}>#
+// 'use strict'
+//
+// var gentlyCopy = require('gently-copy')
+//
+// var src = ['src/scss']
+//
+// // User's local directory
+// var dest = process.env.INIT_CWD + '/' + process.env.MONO_LOCAL_PATH
+//
+// // Moving files to user's local directory
+// gentlyCopy(src, dest)
+
+
+
+
+
+
+
+
 //Copy the scss folder to the root of the prokect when install by NPM
 //Copy a starter package.json from helper to the root of project when install by NPM
 
@@ -5,21 +29,25 @@ const fs = require('fs-extra');
 
 // Async/Await:
 async function copyFiles() {
+  const src = 'src/scss'
+  const cwd = process.env.INIT_CWD
+  const userPath = process.env.MONO_LOCAL_PATH + '/mono/'
+  const dest = cwd + '/' + userPath
   try {
-await fs.copy('src/scss', '../../scss', {
-      overwrite: false,
+    await fs.copy(src, dest, {
+      overwrite: process.env.MONO_OVERWRITE || false,
       errorOnExist: true,
     });
     console.log(
       '\x1b[32m',
-      'OK! Styles have landed in your project, check scss folder.'
+      `Yay! Mono was copied to: ${userPath}. Add @import '${userPath}'; to your main scss file.`
     );
     return true;
   } catch (error) {
     if (error.message.includes('already exists')) {
       console.log(
         '\x1b[36m',
-        'It looks like ./scss folder already exist. Complementary files were added to it. Happy coding'
+        `It looks like ${userPath} folder already exist. Complementary files were added to it.`
       );
       return false;
     }
@@ -28,6 +56,13 @@ await fs.copy('src/scss', '../../scss', {
 }
 
 copyFiles();
+
+
+
+
+
+
+
 
 // Adding commands to script key in package.json at root level of project
 // const saveFile = require('fs').writeFileSync;
