@@ -1,4 +1,4 @@
-{
+const config = {
   "source": ["src/tokens/*.json"],
   "basePxFontSize": 16,
   "platforms": {
@@ -18,3 +18,4 @@
   }
 }
 
+export default config;

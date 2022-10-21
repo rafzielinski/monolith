@@ -1,12 +1,16 @@
 {
-  "name": "monolith",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "mono.style",
+  "version": "0.1.0",
+  "main": "mono.js",
   "license": "MIT",
+  "type": "module",
+  "bin": {
+    "mono": "./mono.js"
+  },
   "scripts": {
     "tokens": "node ./transformTokens.js",
     "start": "parcel serve src/index.html --dist-dir dist",
-    "postinstall": "node postinstall.js"
+    "init": "node init.js"
   },
   "devDependencies": {
     "@babel/core": "^7.14.2",
@@ -14,7 +18,6 @@
     "@babel/preset-env": "^7.14.2",
     "@parcel/transformer-sass": "2.7.0",
     "autoprefixer": "^10.4.10",
-    "env2": "^2.2.2",
     "gently-copy": "^3.2.0",
     "parcel": "^2.0.0-beta.1",
     "postcss": "^8",
@@ -27,6 +30,7 @@
   },
   "dependencies": {
     "css-purge": "^3.1.8",
-    "fs-extra": "^10.1.0"
+    "fs-extra": "^10.1.0",
+    "meow": "^11.0.0"
   }
 }

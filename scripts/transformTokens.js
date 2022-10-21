@@ -1,5 +1,8 @@
-const StyleDictionary = require('style-dictionary')
-const baseConfig = require('./config.json')
+// const StyleDictionary = require('style-dictionary')
+// const baseConfig = require('./config.json')
+
+import StyleDictionary from 'style-dictionary';
+import baseConfig from './config.js';
 
 // Transform px values to rem
 StyleDictionary.registerTransform({
@@ -136,6 +139,9 @@ StyleDictionary.registerFilter({
   }
 })
 
-const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)
+function transformTokens() {
+  const StyleDictionaryExtended = StyleDictionary.extend(baseConfig)
+  StyleDictionaryExtended.buildAllPlatforms()
+}
 
-StyleDictionaryExtended.buildAllPlatforms()
+export default transformTokens;

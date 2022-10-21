@@ -65,8 +65,8 @@ $fontSchema: (
     $value: clamp($valueStart, calc($vw + $rem), $valueEnd);
   } 
 
-  @debug $value, $rangeStart, $rangeEnd;
-  @debug ----;
+  // @debug $value, $rangeStart, $rangeEnd;
+  // @debug ----;
 
   @return $value;
 }

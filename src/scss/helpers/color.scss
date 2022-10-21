@@ -1,6 +1,0 @@
-@use 'sass:string';
-
-@function color($key) {
-  @return token('color', "" + $key);
-}
-

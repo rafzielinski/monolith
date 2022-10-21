@@ -1,5 +1,3 @@
-@use 'sass:map';
-
 $configs: (
   typography: (
     baseFontSize: 16,
@@ -17,7 +15,7 @@ $configs: (
         end: desktop
       ),
       tags: (
-        // 'header 1': true,
+        'header 1': true,
         'header 2': (
           styles: (
             end: (
@@ -41,7 +39,4 @@ $configs: (
     ),
   )
 );
-
-// Populate breakpoints from tokens and customBreakpoints map
-// $configs: map.set($configs, layout, breakpoints, map.merge(token(breakpoints), config(layout, customBreakpoints)));
 

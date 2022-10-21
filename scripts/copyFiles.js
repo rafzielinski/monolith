@@ -1,47 +1,25 @@
-// #<{(|*
-//  * Script to run after npm install
-//  *
-//  * Copy selected files to user's directory
-//  |)}>#
-// 'use strict'
-//
-// var gentlyCopy = require('gently-copy')
-//
-// var src = ['src/scss']
-//
-// // User's local directory
-// var dest = process.env.INIT_CWD + '/' + process.env.MONO_LOCAL_PATH
-//
-// // Moving files to user's local directory
-// gentlyCopy(src, dest)
+'use strict'
 
-
-
-
-
-
-
-
-//Copy the scss folder to the root of the prokect when install by NPM
-//Copy a starter package.json from helper to the root of project when install by NPM
-
-const fs = require('fs-extra');
+import fs from 'fs-extra';
 
 // Async/Await:
-async function copyFiles() {
-  const src = 'src/scss'
-  const cwd = process.env.INIT_CWD
-  const env = require('env2')(cwd + '/.env');
-  const userPath = process.env.MONO_LOCAL_PATH + '/mono/'
-  const dest = cwd + '/' + userPath
+async function copyFiles(destination, overwrite) {
+  const cwd = process.env.PWD
+  const userPath = (destination + '/mono/').replace('//', '/')
+  const src = (cwd + '/node_modules/monolith/src/mono').replace('//','/')
+  const dest = (cwd + '/' + userPath).replace('//','/')
+
+console.log('from : ', src)
+console.log('to : ', dest)
+
   try {
     await fs.copy(src, dest, {
-      overwrite: process.env.MONO_OVERWRITE || false,
+      overwrite: overwrite,
       errorOnExist: true,
     });
     console.log(
       '\x1b[32m',
-      `Yay! Mono was copied to: ${userPath}. Add @import '${userPath}'; to your main scss file.`
+      `Yay! Mono was copied to: ${dest}. Add @import '${userPath}'; to your main scss file.`
     );
     return true;
   } catch (error) {
@@ -56,7 +34,7 @@ async function copyFiles() {
   }
 }
 
-copyFiles();
+export default copyFiles;
 
 
 

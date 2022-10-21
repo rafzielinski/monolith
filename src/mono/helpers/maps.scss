@@ -49,19 +49,20 @@
   @return safe-unquote($value);
 }
 
+// Config
 @function config($keys...) {
   $value: map.get($configs, $keys...);
   @return $value;
 }
 
+// Tokens
 @function token($keys...) {
   $value: map.get($tokens, $keys...);
   @return $value;
 }
 
-@function slot($keys...) {
-  $value: map.get($slots, $keys...);
-  @return $value;
+@function color($key) {
+  @return token('color', "" + $key);
 }
 
 @function breakpoint($keys...) {
@@ -73,3 +74,16 @@
   @return map-sort-by-values(map.merge(token(breakpoints), ('default': 0)));
 }
 
+// Slots
+@function slot($keys...) {
+  $value: map.get($slots, $keys...);
+  @return $value;
+}
+
+@function color-slot($keys...) {
+  @return slot(colors, $keys...);
+}
+
+@mixin grid-slot($name) {
+  grid-column: unquote(slot(grid, $name));
+}
