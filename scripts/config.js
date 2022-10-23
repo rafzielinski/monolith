@@ -1,10 +1,10 @@
 const config = {
-  "source": ["src/tokens/*.json"],
+  "source": [],
   "basePxFontSize": 16,
   "platforms": {
     "scss": {
       "transforms": ["attribute/cti", "name/cti/kebab", "time/seconds", "dimension/pxToRem", "color/hsla", "scss/deepMap"],
-      "buildPath": "src/scss/",
+      "buildPath": "",
       "files": [{
         "destination": "tokens.scss",
         "format": "scss/map-deep",
