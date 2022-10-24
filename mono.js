@@ -3,7 +3,7 @@
 
 import meow from 'meow';
 import copyFiles from './scripts/copyFiles.js';
-import transformTokens from './scripts/transformTokens.js'
+import { transformTokens, transformTokensFromConfig } from './scripts/transformTokens.js'
 
 const pkgName = 'MONO';
 const pkgCommand = 'mono';
@@ -31,7 +31,12 @@ const cli = meow(`
 		token: {
 			type: 'string',
 			alias: 't',
-			isRequired: (flags, input) => input[0] == 'tokens' ? true : false
+			// isRequired: (flags, input) => input[0] == 'tokens' ? true : false
+		},
+		config: {
+			type: 'string',
+			alias: 'c',
+			// isRequired: (flags, input) => input[0] == 'tokens' ? true : false
 		},
 		dest: {
 			type: 'string',
@@ -46,16 +51,23 @@ const cli = meow(`
 	}
 });
 
-// const [,, ...args] = process.argv
-console.log(`hellooooo ${JSON.stringify(cli, null, 4)}`)
+const currentCommand = cli.input[0];
 
-const command = cli.input[0];
-
-if (command == 'copy') {
-	copyFiles(cli.flags.dest, cli.flags.overwrite)
-} else if (command == 'tokens') {
-	transformTokens(cli.flags.dest, cli.flags.token)
+switch (currentCommand) {
+	case 'copy' :
+		console.log('copying')
+		copyFiles(cli.flags.dest, cli.flags.overwrite)
+		break
+	case 'tokens' :
+		console.log('tokening')
+		if (cli.flags.config != undefined) {
+			transformTokensFromConfig(cli.flags.config)
+		} else {
+			transformTokens(cli.flags.dest, cli.flags.token)
+		}
+		break
+	default:
+		console.log('Command not found.')
+		console.log(cli.help)
 }
-
-console.log(copyFiles, transformTokens)
 
