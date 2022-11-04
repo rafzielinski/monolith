@@ -1,6 +1,12 @@
 // @use 'sass:map';
 
 $slots: (
+  // Define color slots
+  //
+  // Nested maps structure
+  // Value: valid token color name
+  //
+  // Usage: color-slot(page, background) -> color(white) -> #fff
   color: (
     page: (
       background: white,
@@ -16,6 +22,11 @@ $slots: (
       )
     )
   ),
+  // Define grid slots
+  //
+  // Value: valid grid-column css value
+  //
+  // Usage: grid-slot(full) -> grid-column: 1 / -1;
   grid: (
     full: '1 / -1',
     wide: '2 / -2',
