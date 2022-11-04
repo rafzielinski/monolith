@@ -1,7 +1,7 @@
 
 /**
  * Do not edit directly
- * Generated on Mon, 24 Oct 2022 16:40:18 GMT
+ * Generated on Fri, 28 Oct 2022 12:43:15 GMT
  */
 
 $sizes-component-desktop: 8rem !default;
@@ -12,18 +12,23 @@ $breakpoints-desktop: 80rem !default;
 $breakpoints-mobile: 48rem !default;
 $breakpoints-tablet: 64rem !default;
 $breakpoints-navigation: 64rem !default;
-$radius-default-mobile: ("smoothing": 0, "topLeft": 10, "topRight": 16, "bottomLeft": 0, "bottomRight": 8) !default;
-$radius-default-desktop: ("smoothing": 0, "topLeft": 20, "topRight": 20, "bottomLeft": 20, "bottomRight": 20) !default;
+$radius-default-mobile: ("smoothing": 0, "topLeft": 0, "topRight": 0, "bottomLeft": 0, "bottomRight": 0) !default;
+$radius-default-desktop: ("smoothing": 0, "topLeft": 8, "topRight": 8, "bottomLeft": 8, "bottomRight": 8) !default;
+$radius-button-mobile: ("smoothing": 0, "topLeft": 4, "topRight": 4, "bottomLeft": 4, "bottomRight": 4) !default;
+$radius-button-tablet: ("smoothing": 0, "topLeft": 6, "topRight": 6, "bottomLeft": 6, "bottomRight": 6) !default;
 $color-dark-green: hsla(196,37%,24%,1.0) !default;
 $color-green: hsla(173,58%,39%,1.0) !default;
+$color-white: hsla(0,0%,100%,1.0) !default;
+$color-default: hsla(196,37%,24%,1.0) !default;
 $grid-main: ("pattern": columns, "gutterSize": 16, "alignment": stretch, "count": 12, "offset": 0) !default;
 $grid-alt: ("pattern": columns, "gutterSize": 4, "alignment": stretch, "count": 7, "offset": 0) !default;
 $font-header-4: ("fontSize": 128, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 38.4, "lineHeight": 153.6, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-paragraph: ("fontSize": 16, "textDecoration": none, "fontFamily": Lato, "fontWeight": 500, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 19.2, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-header-1-default: ("fontSize": 32, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-header-1-tablet: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 6.4, "lineHeight": 76.8, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-header-1-desktop: ("fontSize": 128, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 38.4, "lineHeight": 153.6, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-header-2-default-fluid-start: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
-$font-header-2-tablet-fluid-end: ("fontSize": 32, "textDecoration": none, "fontFamily": Sofia Sans, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 3.84, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-header-2-default: ("fontSize": 20, "textDecoration": none, "fontFamily": Lato, "fontWeight": 400, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 24, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
+$font-header-2-tablet: ("fontSize": 32, "textDecoration": none, "fontFamily": Sofia Sans, "fontWeight": 600, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 3.84, "lineHeight": 38.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-header-3-default: ("fontSize": 16, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 0, "lineHeight": 19.2, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-header-3-desktop: ("fontSize": 64, "textDecoration": none, "fontFamily": Lato, "fontWeight": 900, "fontStyle": normal, "fontStretch": normal, "letterSpacing": 9.6, "lineHeight": 100, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $effect-drop-shadow: ("shadowType": dropShadow, "radius": 8, "color": #0000001a, "offsetX": 0, "offsetY": 4, "spread": 0) !default;
@@ -54,11 +59,17 @@ $tokens: (
     'default': (
       'mobile': $radius-default-mobile,
       'desktop': $radius-default-desktop
+    ),
+    'button': (
+      'mobile': $radius-button-mobile,
+      'tablet': $radius-button-tablet
     )
   ),
   'color': (
     'dark-green': $color-dark-green,
-    'green': $color-green
+    'green': $color-green,
+    'white': $color-white,
+    'default': $color-default
   ),
   'grid': (
     'main': $grid-main,
@@ -66,18 +77,15 @@ $tokens: (
   ),
   'font': (
     'header 4': $font-header-4,
+    'paragraph': $font-paragraph,
     'header 1': (
       'default': $font-header-1-default,
       'tablet': $font-header-1-tablet,
       'desktop': $font-header-1-desktop
     ),
     'header 2': (
-      'default': (
-        'fluid-start': $font-header-2-default-fluid-start
-      ),
-      'tablet': (
-        'fluid-end': $font-header-2-tablet-fluid-end
-      )
+      'default': $font-header-2-default,
+      'tablet': $font-header-2-tablet
     ),
     'header 3': (
       'default': $font-header-3-default,

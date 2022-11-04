@@ -81,7 +81,7 @@
 }
 
 @function color-slot($keys...) {
-  @return slot(colors, $keys...);
+  @return color(slot(color, $keys...));
 }
 
 @mixin grid-slot($name) {

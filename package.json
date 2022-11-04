@@ -1,9 +1,14 @@
 {
   "name": "mono.style",
   "version": "0.1.0",
-  "main": "mono.js",
   "license": "MIT",
   "type": "module",
+  "main": "main.js",
+  "sass": "mono.scss",
+  "files": [
+    "mono.scss",
+    "src/mono/**/*.scss"
+  ],
   "bin": {
     "mono": "./mono.js"
   },
