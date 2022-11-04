@@ -1,7 +1,7 @@
 @mixin grid($name: main) {
   $grid-columns: token(grid, $name, count);
   $grid-gap: rem(token(grid, $name, gutterSize));
-  $grid-free-space: minmax(0, calc((100vw - token(sizes, grid, $name, width) - ($grid-gap * 2)) / 2));
+  $grid-free-space: minmax(0, calc((100vw - token(sizes, grid, $name, width) - 2 * $grid-gap) / 2));
 
   display: grid;
   grid-template-columns: 

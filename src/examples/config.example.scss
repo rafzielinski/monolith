@@ -1,11 +1,18 @@
 $configs: (
   typography: (
-    baseFontSize: 16, // This is used for px to rem calculations
-    fontFallbacks: ( // for keys use fontFamily /quoted/ as defined in tokens.scss
+    // Define base font size
+    // This is used for px to rem calculations
+    //
+    // Value: number
+    baseFontSize: 16, 
+    // Define font fallbacks
+    //
+    // Key: quoted string, should match fontFamily name as defined in tokens.scss
+    // Value: quoted string of valid css font-family
+    fontFallbacks: ( 
       'Lato': 'Arial, Verdana, sans-serif',
       'Sofia Sans': 'Times New Roman, serif',
     ),
-
     // Fluid typography config
     //
     // Used to apply fluid typography to font styles
