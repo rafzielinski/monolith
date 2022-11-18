@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:string';
 
 @function map-sort-by-values($map) {
   // Transform map to zipped list
@@ -62,7 +63,31 @@
 }
 
 @function color($keys...) {
-  @return token(color, $keys...);
+  $color-found: false;
+  $color: token(color, $keys...);
+
+  @if (type-of($color) == 'map') {
+    $keys-list: map.keys($color);
+
+    @each $key in $keys-list {
+      @if (string.index($key, '*')) {
+        $color-found: true;
+        $color: map.get($color, $key);
+      }
+    }
+
+    @if (not $color-found) {
+      @error 'There is no main color defined. Use named key to access the color. Available keys: #{$keys-list}';
+    }
+  } @else if (type-of($color) == 'color') {
+    $color-found: true;
+  }
+
+  @if (not $color-found) {
+    @error 'Color not found. Check if #{$keys} exist in tokens.'
+  }
+
+  @return $color;
 }
 
 @function breakpoint($keys...) {
