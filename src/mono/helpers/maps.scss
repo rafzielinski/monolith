@@ -61,8 +61,8 @@
   @return $value;
 }
 
-@function color($key) {
-  @return token('color', "" + $key);
+@function color($keys...) {
+  @return token(color, $keys...);
 }
 
 @function breakpoint($keys...) {
@@ -81,9 +81,16 @@
 }
 
 @function color-slot($keys...) {
-  @return color(slot(color, $keys...));
+  $value: slot(color, $keys...);
+  @return color(#{$value});
 }
 
 @mixin grid-slot($name) {
-  grid-column: unquote(slot(grid, $name));
+  $value: slot(grid, $name);
+
+  @if $value == null { 
+    @error 'There is no slot defined for grid > #{$name}'; 
+  }
+
+  grid-column: unquote($value);
 }

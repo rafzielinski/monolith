@@ -1,17 +1,81 @@
-@mixin grid($name: main) {
-  $grid-columns: token(grid, $name, count);
-  $grid-gap: rem(token(grid, $name, gutterSize));
-  $grid-free-space: minmax(0, calc((100vw - token(sizes, grid, $name, width) - 2 * $grid-gap) / 2));
+@use 'sass:map';
 
-  display: grid;
-  grid-template-columns: 
-    #{$grid-free-space}
-    repeat(token(grid, $name, count), 1fr)
-    #{$grid-free-space};
+@mixin grid($name: main, $breakpoint: false) {
+  $grid-token: token(grid, $name);
+  $grid-width: token(sizes, grid, $name);
 
-  column-gap: $grid-gap;
+  @if($breakpoint) {
+    @if (map.has-key(token(grid, $name), $breakpoint)) {
+      $grid-token: token(grid, $name, $breakpoint);
+    } @else {
+      @error 'Value not found. Expected token grid > #{$name} > #{$breakpoint} being a valid grid map.';
+    }
 
-  width: 100%;
-  height: auto;
+    @if (type-of(token(sizes, grid, $name)) == 'map' and map.has-key(token(sizes, grid, $name), $breakpoint)) {
+      $grid-width: token(sizes, grid, $name, $breakpoint);
+    }
+  }
+
+  @if not (map.has-key($grid-token, 'count') and map.has-key($grid-token, 'gutterSize')) {
+    @error 'Invalid Value. Expected keys `count` & `gutterSize` to be a defined, instead has: #{map.keys($grid-token)}.';
+  }
+
+  $grid-columns: map.get($grid-token, count);
+  $grid-gap: rem(map.get($grid-token, gutterSize));
+  $grid-offset: rem(map.get($grid-token, offset));
+  $grid-free-space: 0; // minmax(0, $grid-gap);
+
+  @if ($grid-width != null and type-of($grid-width) == 'number') {
+    @debug $grid-width;
+    @debug $grid-offset;
+    @debug '---';
+    $grid-free-space: minmax(0, calc((100vw - $grid-width - 2 * $grid-gap) / 2));
+  }
+
+  @include screen($breakpoint) {
+    display: grid;
+    grid-template-columns: 
+      #{$grid-free-space}
+      repeat($grid-columns, 1fr)
+      #{$grid-free-space};
+
+    column-gap: $grid-gap;
+
+    width: 100%;
+    height: auto;
+  }
+}
+
+@mixin responsive-grid($name: main) {
+  $grid-token: token(grid, $name);
+
+  @if($grid-token) {
+    @if(type-of($grid-token) == 'map') {
+      @each $screen, $value in sortedBreakpoints() {
+        $stepSize: map.get($grid-token, $screen);
+
+        @if ($stepSize != null) {
+          @include grid($name, $screen);
+        }
+      }
+    } @else {
+      @include grid($name);
+    }
+  }
+
+  // $grid-columns: token(grid, $name, default, count);
+  // $grid-gap: rem(token(grid, $name, default, gutterSize));
+  // $grid-free-space: minmax(0, calc((100vw - token(sizes, grid, $name, default) - 2 * $grid-gap) / 2));
+  //
+  // display: grid;
+  // grid-template-columns: 
+  //   #{$grid-free-space}
+  //   repeat($grid-columns, 1fr)
+  //   #{$grid-free-space};
+  //
+  // column-gap: $grid-gap;
+  //
+  // width: 100%;
+  // height: auto;
 }
 
