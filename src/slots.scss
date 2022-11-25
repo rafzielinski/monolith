@@ -1,0 +1,35 @@
+$slots: (
+  color: (
+    test: (grey, 300),
+    page: (
+      background: white,
+      text: blue
+    ),
+    article: (
+      nav: (
+        text: black,
+      ),
+    ),
+    typography: (
+      h1: blue,
+      h2: black,
+    ),
+    components: (
+      cta: (
+        background: black,
+      )
+    )
+  ),
+  grid: (
+    full: '1 / -1',
+    wide: '3 / -3',
+    component: '2 / 14',
+    text: '3 / span 6',
+
+    header: '3 / -3',
+  )
+);
+
+// breakpoints: () // this should be where new BPs are generated
+// $slots: map.set($slots, breakpoints, map.merge(token(breakpoints), config(layout, customBreakpoints)));
+

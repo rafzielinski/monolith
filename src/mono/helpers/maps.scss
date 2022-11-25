@@ -1,3 +1,4 @@
+@use "sass:meta";
 @use 'sass:map';
 @use 'sass:string';
 
@@ -64,7 +65,14 @@
 
 @function color($keys...) {
   $color-found: false;
-  $color: token(color, $keys...);
+  $stringKeys: ();
+
+  @for $i from 1 through length($keys) {
+    $key: nth($keys, $i);
+    $stringKeys: append($stringKeys, string.quote(to-lower-case(#{$key})));
+  }
+
+  $color: token(color, $stringKeys...);
 
   @if (type-of($color) == 'map') {
     $keys-list: map.keys($color);
@@ -107,7 +115,16 @@
 
 @function color-slot($keys...) {
   $value: slot(color, $keys...);
-  @return color(#{$value});
+
+  @if type-of($value) == 'map' { 
+    @error 'Looks like this slot goes deeper, please extend your slot arguments. Available keys: #{map.keys($value)}.'; 
+  }
+
+  @if $value == null { 
+    @error 'There is no slot defined for color > #{$keys}'; 
+  }
+
+  @return color($value...);
 }
 
 @mixin grid-slot($name) {
@@ -118,4 +135,30 @@
   }
 
   grid-column: unquote($value);
+}
+
+@mixin responsive-grid-slot($attr, $keys...) {
+  $map: slot(grid, $keys...);
+  $check: false;
+
+  @if (type-of($map) == 'map') {
+    @each $screen, $value in sortedBreakpoints() {
+      $stepSize: map.get($map, $screen);
+
+      @if ($stepSize != null) {
+        $check: true;
+
+        @include screen($screen) {
+          #{$attr}: unquote($stepSize);
+        }
+      }
+    }
+
+    @if (not $check) {
+      @error 'No breakpoints found. You need to select a key that returns a map containing one of following keys: #{map.keys(sortedBreakpoints())}';
+    }
+
+  } @else {
+    @error 'No map found. Instead had: Type <#{type-of($map)}>: #{$map}';
+  }
 }
