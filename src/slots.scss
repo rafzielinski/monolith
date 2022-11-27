@@ -1,4 +1,13 @@
+// 
+// Slots
+// Deep map providing nodes to elements. 
+
+
 $slots: (
+  // Color
+  // value: color token name or list of keys for deeper nested colors
+  // usage: color-slot(test)
+  //        color-slot(typography, h1)
   color: (
     test: (grey, 300),
     page: (
