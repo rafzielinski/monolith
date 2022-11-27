@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use 'sass:string';
 
+// Move to utils/map
 @function map-sort-by-values($map) {
   // Transform map to zipped list
   $keys: ();
@@ -46,23 +47,36 @@
   @return $sortedMap;
 }
 
+// Get unquoted value from a map
 @function map-get-plain($map, $keys...) {
   $value: map.get($map, $keys...);
   @return safe-unquote($value);
 }
 
-// Config
+// Get value from a config map
 @function config($keys...) {
   $value: map.get($configs, $keys...);
   @return $value;
 }
 
-// Tokens
+// Get value from a tokens map
 @function token($keys...) {
   $value: map.get($tokens, $keys...);
   @return $value;
 }
 
+// Get color value from token map
+// 
+// For color palletes you can use `*` to mark primary color,
+// this will allow for a shorter syntax.
+// 
+// Example:
+// `color(grey)` -> $token: grey > 300* -> #fafafa
+//
+// Usage:
+// color(white)
+// color(purple, 300)
+//
 @function color($keys...) {
   $color-found: false;
   $stringKeys: ();
@@ -98,47 +112,55 @@
   @return $color;
 }
 
+// Get breakpoint value from tokens map
 @function breakpoint($keys...) {
   $value: token(breakpoints, $keys...);
   @return $value;
 }
 
+// Get map of sorted breakpoints prepended with `'default': 0` from tokens map
 @function sortedBreakpoints() {
   @return map-sort-by-values(map.merge(token(breakpoints), ('default': 0)));
 }
 
-// Slots
+// Get value from slots map
 @function slot($keys...) {
   $value: map.get($slots, $keys...);
-  @return $value;
-}
-
-@function color-slot($keys...) {
-  $value: slot(color, $keys...);
-
+  
   @if type-of($value) == 'map' { 
     @error 'Looks like this slot goes deeper, please extend your slot arguments. Available keys: #{map.keys($value)}.'; 
   }
 
   @if $value == null { 
-    @error 'There is no slot defined for color > #{$keys}'; 
+    @error 'There is no slot defined for #{$keys}'; 
   }
+  
+  @return $value;
+}
+
+// Get color value from slot map
+@function color-slot($keys...) {
+  $value: slot(color, $keys...);
 
   @return color($value...);
 }
 
+// Get grid value from slot map
 @mixin grid-slot($name) {
   $value: slot(grid, $name);
-
-  @if $value == null { 
-    @error 'There is no slot defined for grid > #{$name}'; 
-  }
 
   grid-column: unquote($value);
 }
 
-@mixin responsive-grid-slot($attr, $keys...) {
-  $map: slot(grid, $keys...);
+// Get responsive pair of attribute & value from slot map.
+// Slot should be a map of valid breakpoints as keys.
+//   
+// Usage:
+// responsive-slot('grid-column', grid, component, small) 
+// -> slot: grid > component > small
+// ->
+@mixin responsive-slot($attr, $keys...) {
+  $map: slot($keys...);
   $check: false;
 
   @if (type-of($map) == 'map') {
