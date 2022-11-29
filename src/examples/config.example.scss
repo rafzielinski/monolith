@@ -39,9 +39,9 @@ $configs: (
       // Value: boolean | map
       tags: (
         // Activates fluid typography using default values
-        'header 1': true,
+        'heading-2xl': true,
         // Activates fluid typography using custom range and styles from tokens.scss
-        'header 2': (
+        'heading-xl': (
           range: (
             end: tablet
           ),
@@ -51,7 +51,7 @@ $configs: (
         ),
         // Activates fluid typography using custom styles map
         // Supported attributes: font-size, line-height, letter-spacing
-        'header 3': (
+        'heading-lg': (
           styles: (
             end: (
               font-size: 3rem,

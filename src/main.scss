@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 @import 'tokens';
 @import 'config';
 @import 'slots';
@@ -5,6 +7,14 @@
 @import 'mono';
 
 // @import 'reset';
+
+
+body {
+  @include responsive-slot('grid-column', grid, header);
+
+}
+@debug slot(color, test);
+
 
 *,
 *::before,
@@ -117,7 +127,7 @@ article {
   @include responsive-grid();
 
   header {
-    @include grid-slot(header);
+    @include responsive-slot('grid-column', grid, header);
 
     @include responsive-size('margin-top', md);
     @include responsive-size('margin-bottom', xl);

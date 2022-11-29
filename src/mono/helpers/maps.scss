@@ -1,5 +1,6 @@
 @use "sass:meta";
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:string';
 
 // Move to utils/map
@@ -126,13 +127,25 @@
 // Get value from slots map
 @function slot($keys...) {
   $value: map.get($slots, $keys...);
-  
-  @if type-of($value) == 'map' { 
+
+  @if type-of($value) == 'map' and not list.index(map.keys($value), 'default') { 
     @error 'Looks like this slot goes deeper, please extend your slot arguments. Available keys: #{map.keys($value)}.'; 
   }
 
   @if $value == null { 
     @error 'There is no slot defined for #{$keys}'; 
+  }
+
+  @if type-of($value) == 'string' {
+    @if string.index($value, '(') and string.index($value, ')') == string.length($value) {
+      $m: str-split(string.slice(str-replace($value, ' ', ''), 1, -2), '(');
+      $func: list.nth($m, 1);
+      $args: str-split(list.nth($m, 2), ',');
+
+      @if meta.function-exists($func) {
+        $value: meta.call(meta.get-function($func), $args...);
+      }
+    }
   }
   
   @return $value;

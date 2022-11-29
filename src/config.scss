@@ -9,11 +9,13 @@ $configs: (
     // Fluid typography config
     //
     // Used to apply fluid typography to font styles
+    //
     fluid: ( 
       // Default range
       //
       // Defines start and end breakpoints for fluid typography
       // Value should be a valid breakpoint key
+      //
       range: ( 
         start: mobile,
         end: desktop,
@@ -22,6 +24,7 @@ $configs: (
       //
       // Defines start and end styles for fluid typography
       // Value should be a valid font style key
+      //
       styles: (
         start: default,
         end: desktop
@@ -30,6 +33,7 @@ $configs: (
       //
       // Key: should be a quoted string of valid font style name
       // Value: boolean | map
+      //
       tags: (
         // Activates fluid typography using default values
         'heading 2xl': true,

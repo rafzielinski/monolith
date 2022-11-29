@@ -1,18 +1,20 @@
 // 
 // Slots
 // Deep map providing nodes to elements. 
-
-
+//
+// value: There are few keywords 
+// color token name or list of keys for deeper nested and responsive colors.
+//        responsive colors
+// usage: slot(color, test)
+//        slot(color, typography, h1)
+//        responsive-slot('grid-column', grid, component, cta)
+//
 $slots: (
-  // Color
-  // value: color token name or list of keys for deeper nested colors
-  // usage: color-slot(test)
-  //        color-slot(typography, h1)
   color: (
-    test: (grey, 300),
+    test: token(color, grey, 500),
     page: (
-      background: white,
-      text: blue
+      background: token(color, white),
+      text: token(color, blue)
     ),
     article: (
       nav: (
@@ -29,13 +31,18 @@ $slots: (
       )
     )
   ),
+
   grid: (
     full: '1 / -1',
     wide: '3 / -3',
     component: '2 / 14',
     text: '3 / span 6',
 
-    header: '3 / -3',
+    header: (
+      default: '1 / -1',
+      tablet: '2 / -2',
+      desktop: '3 / -3',
+    )
   )
 );
 
