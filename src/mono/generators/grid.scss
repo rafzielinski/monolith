@@ -26,7 +26,6 @@
   $grid-free-space: 0; // minmax(0, $grid-gap);
 
   @if ($grid-width != null and type-of($grid-width) == 'number') {
-    // $grid-free-space: minmax(0, calc((100vw - $grid-width - 2 * $grid-gap) / 2));
     $grid-free-space: minmax(0, calc((100vw - $grid-width) / 2));
   }
 
@@ -56,18 +55,13 @@
 
   @include screen($breakpoint) {
     display: grid;
-    // grid-template-columns: 
-    //   #{$grid-free-space}
-    //   repeat($grid-columns, 1fr);
-    //   #{$grid-free-space};
-    // column-gap: $grid-gap;
 
     grid-template-columns: $grid-template-columns;
 
     margin: 0 auto;
 
     width: 100%;
-    max-width: 100vw; // $grid-width;
+    max-width: 100vw;
     height: auto;
   }
 }

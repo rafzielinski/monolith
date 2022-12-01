@@ -38,10 +38,19 @@ $slots: (
     component: '2 / 14',
     text: '3 / span 6',
 
+    typography: (
+      h1: (
+        default: '3 / 10',
+      ),
+      h2: (
+        default: '11 / 26',
+      )
+    ),
+
     header: (
-      default: '1 / -1',
-      tablet: '2 / -2',
-      desktop: '3 / -3',
+      default: '3 / -3',
+      tablet: '5 / -3',
+      desktop: '7 / -3',
     )
   )
 );

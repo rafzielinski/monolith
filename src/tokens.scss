@@ -36,9 +36,9 @@ $color-black: hsla(0,0%,0%,1.0) !default;
 $color-white: hsla(0,0%,100%,1.0) !default;
 $color-grey-300: hsla(0,0%,83%,1.0) !default;
 $color-grey-500: hsla(0,0%,66%,1.0) !default;
-$grid-main-desktop: ("pattern": columns, "gutterSize": 20, "alignment": stretch, "count": 12, "offset": 0) !default;
-$grid-main-tablet: ("pattern": columns, "gutterSize": 20, "alignment": stretch, "count": 6, "offset": 0) !default;
-$grid-main-default: ("pattern": columns, "gutterSize": 20, "alignment": stretch, "count": 4, "offset": 0) !default;
+$grid-main-desktop: ("pattern": columns, "gutterSize": 20, "alignment": stretch, "count": 12, "offset": 32) !default;
+$grid-main-tablet: ("pattern": columns, "gutterSize": 20, "alignment": stretch, "count": 6, "offset": 16) !default;
+$grid-main-default: ("pattern": columns, "gutterSize": 20, "alignment": stretch, "count": 4, "offset": 8) !default;
 $font-heading-2xl-default: ("fontSize": 80, "textDecoration": none, "fontFamily": ITC Garamond Std, "fontWeight": 300, "fontStyle": normal, "fontStretch": normal, "letterSpacing": -2.4, "lineHeight": 73.6, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-heading-2xl-tablet: ("fontSize": 110, "textDecoration": none, "fontFamily": ITC Garamond Std, "fontWeight": 300, "fontStyle": normal, "fontStretch": normal, "letterSpacing": -3.3, "lineHeight": 101.2, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
 $font-heading-2xl-desktop: ("fontSize": 170, "textDecoration": none, "fontFamily": ITC Garamond Std, "fontWeight": 300, "fontStyle": normal, "fontStretch": normal, "letterSpacing": -5.1, "lineHeight": 156.4, "paragraphIndent": 0, "paragraphSpacing": 0, "textCase": none) !default;
@@ -96,13 +96,13 @@ $tokens: (
       'desktop': $sizes-xl-desktop,
       'default': $sizes-xl-default
     ),
-    'grid': (
-      'main': (
-        'desktop': $sizes-grid-main-desktop,
-        'tablet': $sizes-grid-main-tablet,
-        'default': $sizes-grid-main-default
-      )
-    )
+    // 'grid': (
+    //   'main': (
+    //     'desktop': $sizes-grid-main-desktop,
+    //     'tablet': $sizes-grid-main-tablet,
+    //     'default': $sizes-grid-main-default
+    //   )
+    // )
   ),
   'breakpoints': (
     'desktop': $breakpoints-desktop,

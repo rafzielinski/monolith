@@ -81,21 +81,21 @@ height: auto;
 }
 
 .layout__item-outer {
-  @include grid-slot(wide);
+  grid-column: slot(grid, wide);
 
   height: 100px;
   background-color: lime;
 }
 
 .layout__item-inner {
-  @include grid-slot(component);
+  grid-column: slot(grid, component);
 
   height: 100px;
   background-color: blue;
 }
 
 .layout__item-content {
-  @include grid-slot(text);
+  grid-column: slot(grid, text);
 
   height: 100px;
   background-color: red;
@@ -131,15 +131,21 @@ article {
 
     @include responsive-size('margin-top', md);
     @include responsive-size('margin-bottom', xl);
-
-    h1 {
-      // @include typography(heading-2xl);
-      @include typography(heading-xl);
-    }
   }
+  
+    h1 {
+      @include typography(heading-2xl);
+      @include responsive-slot('grid-column', grid, typography, h1);
+    }
+
+    h2 {
+      @include typography(heading-xl);
+      @include responsive-slot('grid-column', grid, typography, h2);
+    }
+  
 
   nav {
-    @include grid-slot(full);
+    grid-column: slot(grid, full); 
     @include responsive-grid();
     align-items: stretch;
 
@@ -147,7 +153,7 @@ article {
 
     &::before,
     &::after {
-      @include grid-slot(wide);
+      grid-column: slot(grid, wide);
 
       content: '';
       display: block;
