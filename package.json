@@ -6,14 +6,15 @@
   "main": "main.js",
   "files": [
     "mono.scss",
-    "src/mono/**/*.scss"
+    "src/mono/**/*.scss",
+    "scripts"
   ],
   "bin": {
     "mono": "./mono.js"
   },
   "scripts": {
     "tokens": "node ./transformTokens.js",
-    "start": "parcel serve src/index.html --dist-dir dist",
+    "start": "parcel serve src/example/index.html --dist-dir dist",
     "init": "node init.js"
   },
   "devDependencies": {
@@ -29,10 +30,10 @@
     "postcss-modules": "^5.0.0",
     "postcss-sort-media-queries": "^4.3.0",
     "sass": "^1.32.8",
-    "stimulus": "^3.1.0",
-    "style-dictionary": "^3"
+    "stimulus": "^3.1.0"
   },
   "dependencies": {
+    "style-dictionary": "^3",
     "css-purge": "^3.1.8",
     "fs-extra": "^10.1.0",
     "meow": "^11.0.0"
