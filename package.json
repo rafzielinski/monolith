@@ -7,15 +7,14 @@
   "files": [
     "mono.scss",
     "src/mono/**/*.scss",
-    "scripts"
+    "src/scripts"
   ],
   "bin": {
     "mono": "./mono.js"
   },
   "scripts": {
     "tokens": "node ./transformTokens.js",
-    "start": "parcel serve src/example/index.html --dist-dir dist",
-    "init": "node init.js"
+    "start": "parcel serve src/example/index.html --dist-dir dist"
   },
   "devDependencies": {
     "@babel/core": "^7.14.2",
@@ -37,5 +36,13 @@
     "css-purge": "^3.1.8",
     "fs-extra": "^10.1.0",
     "meow": "^11.0.0"
-  }
-}
+  },
+  "babel": {
+    "plugins": ["@babel/plugin-proposal-class-properties"]
+  },
+  "browserlist": [
+    "IE11",
+    "> 1%",
+    "last 2 versions"
+  ]
+} 

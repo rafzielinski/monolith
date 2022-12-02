@@ -2,8 +2,8 @@
 'use strict';
 
 import meow from 'meow';
-import copyFiles from './scripts/copyFiles.js';
-import { transformTokens, transformTokensFromConfig } from './scripts/transformTokens.js'
+import copyFiles from './src/scripts/copyFiles.js';
+import { transformTokens, transformTokensFromConfig } from './src/scripts/transformTokens.js'
 
 const pkgName = 'MONO';
 const pkgCommand = 'mono';
@@ -18,7 +18,8 @@ const cli = meow(`
 		tokens <options -dt> Generates SCSS tokens from JSON file
 
 	Options
-		--token, -t  Tokens source file exported from Figma in JSON file
+		--token, -t  Tokens source file exported from Figma in JSON file.
+		--config, -c  Style-Dictionary JSON config file path.
 		--dest, -d  Destination path inside the project where ${pkgFolderName} folder should be copied to.
 		--overwrite, -o  Overwrite files on copy.
 
